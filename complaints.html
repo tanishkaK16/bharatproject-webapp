@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ViksitNetra | Citizen Complaints</title>
+    <meta name="description"
+        content="Post problems, upload evidence, and track complaints for local leaders to address." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --saffron: #FF9933;
+            --green: #138808;
+            --bg-dark: #0a0e1a;
+            --bg-surface: #0f172a;
+            --card-bg: rgba(15, 23, 42, 0.75);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .top-header {
+            background: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(16px);
+        }
+
+        .top-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF9933, #fff, #138808);
+        }
+
+        .header-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+
+        .header-brand svg {
+            width: 28px;
+            height: 28px;
+        }
+
+        .header-brand .brand-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .header-brand .brand-sub {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            display: block;
+        }
+
+        .header-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-link {
+            padding: 0.5rem 0.85rem;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .nav-link:hover {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-primary);
+        }
+
+        .nav-link.active {
+            background: rgba(255, 153, 51, 0.12);
+            color: var(--saffron);
+        }
+
+        .nav-link svg {
+            width: 14px;
+            height: 14px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        .user-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.75rem;
+            background: rgba(19, 136, 8, 0.12);
+            border: 1px solid rgba(19, 136, 8, 0.2);
+            border-radius: 20px;
+            font-size: 0.72rem;
+            color: #22c55e;
+        }
+
+        .user-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #138808, #22c55e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .logout-btn {
+            padding: 0.4rem 0.75rem;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            border-radius: 8px;
+            color: #ef4444;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.72rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        .page-title {
+            margin-bottom: 2rem;
+        }
+
+        .page-title h1 {
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .page-title p {
+            color: var(--text-muted);
+            font-size: 0.82rem;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header-nav {
+                gap: 0.25rem;
+            }
+
+            .nav-link span {
+                display: none;
+            }
+        }
+
+        /* ===== COMPLAINT FORM CARD ===== */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #FF9933, #138808);
+        }
+
+        .glass-card h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .glass-card .card-subtitle {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 0.4rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.65rem 0.85rem;
+            background: rgba(15, 23, 42, 0.7);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-primary);
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            outline: none;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            border-color: rgba(255, 153, 51, 0.5);
+            box-shadow: 0 0 0 3px rgba(255, 153, 51, 0.1);
+        }
+
+        .form-select {
+            cursor: pointer;
+        }
+
+        .form-select option {
+            background: var(--bg-surface);
+            color: var(--text-primary);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: var(--text-muted);
+        }
+
+        /* Image Upload */
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .upload-zone:hover {
+            border-color: rgba(255, 153, 51, 0.4);
+            background: rgba(255, 153, 51, 0.03);
+        }
+
+        .upload-zone.dragover {
+            border-color: var(--saffron);
+            background: rgba(255, 153, 51, 0.08);
+        }
+
+        .upload-zone svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 1.5;
+            margin-bottom: 0.5rem;
+        }
+
+        .upload-zone p {
+            font-size: 0.78rem;
+            color: var(--text-secondary);
+        }
+
+        .upload-zone small {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+        }
+
+        .upload-zone input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .preview-grid {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.75rem;
+        }
+
+        .preview-item {
+            position: relative;
+            width: 72px;
+            height: 72px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .preview-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .preview-remove {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 18px;
+            height: 18px;
+            background: rgba(239, 68, 68, 0.9);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(135deg, #FF9933, #e67300);
+            color: #fff;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.3s;
+            margin-top: 0.5rem;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(255, 153, 51, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ===== COMPLAINTS FEED ===== */
+        .feed-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+        }
+
+        .feed-count {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            background: rgba(255, 153, 51, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: 12px;
+        }
+
+        .complaint-card {
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            margin-bottom: 0.75rem;
+            transition: all 0.3s;
+            animation: slideUp 0.4s ease;
+        }
+
+        .complaint-card:hover {
+            border-color: rgba(255, 153, 51, 0.2);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .complaint-meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .complaint-user {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .complaint-user-avatar {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF9933, #e67300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.6rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .complaint-user-info strong {
+            font-size: 0.78rem;
+            display: block;
+        }
+
+        .complaint-user-info small {
+            font-size: 0.6rem;
+            color: var(--text-muted);
+        }
+
+        .complaint-status {
+            font-size: 0.62rem;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: #f59e0b;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .status-resolved {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .status-reviewing {
+            background: rgba(59, 130, 246, 0.15);
+            color: #3b82f6;
+            border: 1px solid rgba(59, 130, 246, 0.3);
+        }
+
+        .complaint-category {
+            display: inline-block;
+            font-size: 0.62rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 6px;
+            background: rgba(139, 92, 246, 0.12);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+            margin-bottom: 0.5rem;
+        }
+
+        .complaint-text {
+            font-size: 0.82rem;
+            line-height: 1.5;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .complaint-images {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 0.5rem;
+        }
+
+        .complaint-img {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            object-fit: cover;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .complaint-img:hover {
+            transform: scale(1.05);
+        }
+
+        .complaint-location {
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .complaint-location svg {
+            width: 12px;
+            height: 12px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* ===== IMAGE MODAL ===== */
+        .img-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .img-modal.show {
+            display: flex;
+        }
+
+        .img-modal img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 12px;
+        }
+
+        .img-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 50%;
+            color: #fff;
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 9999;
+        }
+
+        .toast {
+            background: var(--card-bg);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 12px;
+            padding: 0.75rem 1.25rem;
+            font-size: 0.78rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.4);
+            animation: toastIn 0.4s ease, toastOut 0.4s ease 2.5s forwards;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes toastIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes toastOut {
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+
+        /* ===== EMPTY STATE ===== */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: var(--text-muted);
+        }
+
+        .empty-state svg {
+            width: 48px;
+            height: 48px;
+            stroke: var(--text-muted);
+            fill: none;
+            stroke-width: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state h3 {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.25rem;
+        }
+
+        .empty-state p {
+            font-size: 0.78rem;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header class="top-header">
+        <a href="index.html" class="header-brand">
+            <svg viewBox="0 0 24 24" fill="none">
+                <circle cx="12" cy="12" r="10" stroke="#FF9933" stroke-width="1.5" />
+                <circle cx="12" cy="12" r="3" fill="#FF9933" />
+                <line x1="12" y1="2" x2="12" y2="6" stroke="#138808" stroke-width="1.5" />
+                <line x1="12" y1="18" x2="12" y2="22" stroke="#138808" stroke-width="1.5" />
+            </svg>
+            <div>
+                <span class="brand-name">ViksitNetra</span>
+                <span class="brand-sub">Citizen Portal</span>
+            </div>
+        </a>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                <span>Dashboard</span>
+            </a>
+            <a href="complaints.html" class="nav-link active">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                </svg>
+                <span>Complaints</span>
+            </a>
+            <a href="emergency.html" class="nav-link">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                <span>Emergency</span>
+            </a>
+            <div class="user-badge" id="userBadge">
+                <div class="user-avatar" id="userAvatar">C</div>
+                <span id="userName">Citizen</span>
+            </div>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </header>
+
+    <!-- Toast Container -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Image Modal -->
+    <div class="img-modal" id="imgModal" onclick="closeImgModal()">
+        <button class="img-modal-close" onclick="closeImgModal()">&times;</button>
+        <img id="imgModalSrc" src="" alt="Complaint photo" />
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+        <div class="page-title">
+            <h1>🗣️ Citizen Complaints Portal</h1>
+            <p>Report local issues with photos and descriptions. Your local leaders will review and address them.</p>
+        </div>
+
+        <div class="content-grid">
+            <!-- Complaint Form -->
+            <div class="glass-card">
+                <h2>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg>
+                    Post a New Complaint
+                </h2>
+                <p class="card-subtitle">Describe your problem in detail. Attach images for evidence.</p>
+
+                <form id="complaintForm" onsubmit="submitComplaint(event)">
+                    <div class="form-group">
+                        <label for="complaintCategory">Category</label>
+                        <select id="complaintCategory" class="form-select" required>
+                            <option value="">Select category...</option>
+                            <option value="Road & Infrastructure">🛣️ Road & Infrastructure</option>
+                            <option value="Water Supply">💧 Water Supply</option>
+                            <option value="Electricity">⚡ Electricity</option>
+                            <option value="Sanitation">🧹 Sanitation & Waste</option>
+                            <option value="Healthcare">🏥 Healthcare</option>
+                            <option value="Education">📚 Education</option>
+                            <option value="Public Safety">🔒 Public Safety</option>
+                            <option value="Corruption">⚖️ Corruption</option>
+                            <option value="Environment">🌿 Environment</option>
+                            <option value="Other">📌 Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaintTitle">Problem Title</label>
+                        <input type="text" id="complaintTitle" class="form-input" placeholder="Brief title of the issue"
+                            required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaintDesc">Description</label>
+                        <textarea id="complaintDesc" class="form-textarea"
+                            placeholder="Describe the problem in detail... What is happening? How long has it been? Who is affected?"
+                            required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaintLocation">Location</label>
+                        <input type="text" id="complaintLocation" class="form-input"
+                            placeholder="e.g. Ward 14, Andheri, Mumbai" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Photos (Evidence)</label>
+                        <div class="upload-zone" id="uploadZone">
+                            <svg viewBox="0 0 24 24">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="17 8 12 3 7 8" />
+                                <line x1="12" y1="3" x2="12" y2="15" />
+                            </svg>
+                            <p>Click or drag photos here</p>
+                            <small>JPG, PNG, WEBP up to 5MB each (max 4 images)</small>
+                            <input type="file" id="fileInput" accept="image/*" multiple />
+                        </div>
+                        <div class="preview-grid" id="previewGrid"></div>
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <svg viewBox="0 0 24 24">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                        Submit Complaint
+                    </button>
+                </form>
+            </div>
+
+            <!-- Complaints Feed -->
+            <div class="glass-card">
+                <div class="feed-header">
+                    <h2>
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20"
+                            height="20">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                        </svg>
+                        Recent Complaints
+                    </h2>
+                    <div class="feed-count" id="feedCount">0 complaints</div>
+                </div>
+                <div id="complaintsFeed">
+                    <div class="empty-state" id="emptyState">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                        </svg>
+                        <h3>No complaints yet</h3>
+                        <p>Be the first to report an issue in your area!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== SESSION CHECK =====
+        let currentUser = null;
+
+        (function checkSession() {
+            const session = sessionStorage.getItem('bharatjnana_session');
+            if (session) {
+                currentUser = JSON.parse(session);
+                document.getElementById('userName').textContent = currentUser.name;
+                const initials = currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+                document.getElementById('userAvatar').textContent = initials;
+            }
+        })();
+
+        function logout() {
+            sessionStorage.removeItem('bharatjnana_session');
+            window.location.href = 'login.html';
+        }
+
+        // ===== TOAST =====
+        function showToast(msg) {
+            const c = document.getElementById('toastContainer');
+            const t = document.createElement('div');
+            t.className = 'toast';
+            t.textContent = '✅ ' + msg;
+            c.appendChild(t);
+            setTimeout(() => t.remove(), 3000);
+        }
+
+        // ===== IMAGE UPLOAD =====
+        let uploadedImages = [];
+        const fileInput = document.getElementById('fileInput');
+        const uploadZone = document.getElementById('uploadZone');
+        const previewGrid = document.getElementById('previewGrid');
+
+        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
+        uploadZone.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        fileInput.addEventListener('change', () => handleFiles(fileInput.files));
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (uploadedImages.length >= 4) return;
+                if (!file.type.startsWith('image/')) return;
+                if (file.size > 5 * 1024 * 1024) return;
+
+                const reader = new FileReader();
+                reader.onload = e => {
+                    uploadedImages.push(e.target.result);
+                    renderPreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderPreviews() {
+            previewGrid.innerHTML = uploadedImages.map((img, i) => `
+                <div class="preview-item">
+                    <img src="${img}" alt="Preview ${i + 1}" />
+                    <button type="button" class="preview-remove" onclick="removeImage(${i})">&times;</button>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(idx) {
+            uploadedImages.splice(idx, 1);
+            renderPreviews();
+        }
+
+        // ===== COMPLAINTS STORAGE =====
+        function getComplaints() {
+            return JSON.parse(localStorage.getItem('bharatjnana_complaints') || '[]');
+        }
+
+        function saveComplaints(complaints) {
+            localStorage.setItem('bharatjnana_complaints', JSON.stringify(complaints));
+        }
+
+        // ===== SUBMIT COMPLAINT =====
+        function submitComplaint(e) {
+            e.preventDefault();
+
+            const complaint = {
+                id: 'CMP-' + Date.now().toString().slice(-6),
+                category: document.getElementById('complaintCategory').value,
+                title: document.getElementById('complaintTitle').value.trim(),
+                description: document.getElementById('complaintDesc').value.trim(),
+                location: document.getElementById('complaintLocation').value.trim(),
+                images: [...uploadedImages],
+                user: currentUser ? currentUser.name : 'Anonymous Citizen',
+                userInitials: currentUser ? currentUser.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) : 'AC',
+                status: 'pending',
+                timestamp: new Date().toISOString()
+            };
+
+            const complaints = getComplaints();
+            complaints.unshift(complaint);
+            saveComplaints(complaints);
+
+            // Reset form
+            document.getElementById('complaintForm').reset();
+            uploadedImages = [];
+            renderPreviews();
+
+            showToast('Complaint submitted successfully! ID: ' + complaint.id);
+            renderFeed();
+        }
+
+        // ===== RENDER FEED =====
+        function renderFeed() {
+            const complaints = getComplaints();
+            const feed = document.getElementById('complaintsFeed');
+            const countEl = document.getElementById('feedCount');
+            const emptyState = document.getElementById('emptyState');
+
+            countEl.textContent = complaints.length + ' complaint' + (complaints.length !== 1 ? 's' : '');
+
+            if (complaints.length === 0) {
+                feed.innerHTML = '';
+                feed.appendChild(emptyState);
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            feed.innerHTML = complaints.map(c => {
+                const date = new Date(c.timestamp);
+                const timeAgo = getTimeAgo(date);
+                const statusClass = c.status === 'resolved' ? 'status-resolved' : c.status === 'reviewing' ? 'status-reviewing' : 'status-pending';
+
+                return `
+                <div class="complaint-card">
+                    <div class="complaint-meta">
+                        <div class="complaint-user">
+                            <div class="complaint-user-avatar">${c.userInitials || 'AC'}</div>
+                            <div class="complaint-user-info">
+                                <strong>${escHtml(c.user)}</strong>
+                                <small>${timeAgo}</small>
+                            </div>
+                        </div>
+                        <span class="complaint-status ${statusClass}">${c.status}</span>
+                    </div>
+                    <span class="complaint-category">${escHtml(c.category)}</span>
+                    <h3 style="font-size:0.88rem;margin-bottom:0.35rem">${escHtml(c.title)}</h3>
+                    <p class="complaint-text">${escHtml(c.description)}</p>
+                    ${c.images && c.images.length > 0 ? `
+                        <div class="complaint-images">
+                            ${c.images.map(img => `<img class="complaint-img" src="${img}" alt="Evidence" onclick="openImgModal('${img}')" />`).join('')}
+                        </div>
+                    ` : ''}
+                    <div class="complaint-location">
+                        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" /><circle cx="12" cy="10" r="3" /></svg>
+                        ${escHtml(c.location)} &bull; ID: ${c.id}
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        function getTimeAgo(date) {
+            const diffMs = Date.now() - date.getTime();
+            const mins = Math.floor(diffMs / 60000);
+            if (mins < 1) return 'Just now';
+            if (mins < 60) return mins + 'm ago';
+            const hours = Math.floor(mins / 60);
+            if (hours < 24) return hours + 'h ago';
+            const days = Math.floor(hours / 24);
+            return days + 'd ago';
+        }
+
+        function escHtml(str) {
+            const d = document.createElement('div');
+            d.textContent = str;
+            return d.innerHTML;
+        }
+
+        // ===== IMAGE MODAL =====
+        function openImgModal(src) {
+            document.getElementById('imgModalSrc').src = src;
+            document.getElementById('imgModal').classList.add('show');
+        }
+
+        function closeImgModal() {
+            document.getElementById('imgModal').classList.remove('show');
+        }
+
+        // ===== SEED DEMO DATA =====
+        (function seedDemoData() {
+            const complaints = getComplaints();
+            if (complaints.length === 0) {
+                const demoComplaints = [
+                    {
+                        id: 'CMP-001234',
+                        category: 'Road & Infrastructure',
+                        title: 'Massive pothole causing accidents on NH-48',
+                        description: 'There is a large pothole near the Andheri flyover on NH-48 that has caused multiple bike accidents in the past week. The pothole is about 3 feet wide and filled with water during rain, making it invisible to drivers.',
+                        location: 'NH-48, Andheri East, Mumbai',
+                        images: [],
+                        user: 'Ramesh Patel',
+                        userInitials: 'RP',
+                        status: 'reviewing',
+                        timestamp: new Date(Date.now() - 3600000 * 2).toISOString()
+                    },
+                    {
+                        id: 'CMP-001235',
+                        category: 'Water Supply',
+                        title: 'No water supply for 3 days in Ward 14',
+                        description: 'Our entire ward has been without water supply for the past 3 days. Multiple families are affected and we have been forced to buy tanker water at premium prices. The local municipality office has not responded to our calls.',
+                        location: 'Ward 14, Dadar, Mumbai',
+                        images: [],
+                        user: 'Priya Singh',
+                        userInitials: 'PS',
+                        status: 'pending',
+                        timestamp: new Date(Date.now() - 3600000 * 5).toISOString()
+                    },
+                    {
+                        id: 'CMP-001236',
+                        category: 'Sanitation',
+                        title: 'Garbage not collected for a week',
+                        description: 'The garbage collection has stopped in our locality since last Monday. The pile of garbage near the community park is growing daily and is attracting stray animals. The smell is unbearable and children cannot play in the park anymore.',
+                        location: 'Sector 7, Dwarka, New Delhi',
+                        images: [],
+                        user: 'Amit Kumar',
+                        userInitials: 'AK',
+                        status: 'resolved',
+                        timestamp: new Date(Date.now() - 3600000 * 24).toISOString()
+                    }
+                ];
+                saveComplaints(demoComplaints);
+            }
+            renderFeed();
+        })();
+    </script>
+</body>
+
+</html>

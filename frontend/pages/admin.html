@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel — ViksitNetra</title>
+    <meta name="description" content="System administration panel for ViksitNetra sovereign AI platform." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --saffron: #FF9933;
+            --green: #138808;
+            --navy: #0a0f1e;
+            --navy-2: #0d1526;
+            --card-bg: rgba(255, 255, 255, 0.04);
+            --card-border: rgba(255, 255, 255, 0.06);
+            --text: #e2e8f0;
+            --text-muted: #64748b;
+            --purple: #7c3aed;
+            --cyan: #06b6d4;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--navy);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        .admin-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: var(--navy-2);
+            border-right: 1px solid var(--card-border);
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .sidebar-brand {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .sidebar-brand h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--saffron), var(--green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .sidebar-brand small {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            -webkit-text-fill-color: var(--text-muted);
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.7rem 1rem;
+            border-radius: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .sidebar-link:hover,
+        .sidebar-link.active {
+            color: var(--saffron);
+            background: rgba(255, 153, 51, 0.08);
+        }
+
+        .sidebar-link .icon {
+            font-size: 1.1rem;
+        }
+
+        .sidebar-footer {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid var(--card-border);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .page-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.8rem;
+        }
+
+        .page-header .header-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-badge {
+            padding: 0.35rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .status-badge.online {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .btn-action {
+            padding: 0.5rem 1.2rem;
+            border-radius: 8px;
+            border: 1px solid var(--saffron);
+            background: rgba(255, 153, 51, 0.1);
+            color: var(--saffron);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-action:hover {
+            background: var(--saffron);
+            color: #000;
+        }
+
+        .btn-action:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Metric Cards */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .metric-card {
+            padding: 1.25rem;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .metric-card .metric-label {
+            font-size: 0.72rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-card .metric-value {
+            font-size: 1.6rem;
+            font-weight: 700;
+            font-family: 'Rajdhani', sans-serif;
+        }
+
+        .metric-card .metric-bar {
+            height: 4px;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.06);
+            margin-top: 0.75rem;
+            overflow: hidden;
+        }
+
+        .metric-card .metric-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 0.5s;
+        }
+
+        /* Data Table */
+        .data-section {
+            margin-bottom: 2rem;
+        }
+
+        .data-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.82rem;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 0.7rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--card-border);
+        }
+
+        .data-table th {
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .data-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .status-dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+        }
+
+        .status-dot.healthy {
+            background: #22c55e;
+        }
+
+        .status-dot.degraded {
+            background: #f59e0b;
+        }
+
+        .status-dot.error {
+            background: #ef4444;
+        }
+
+        /* Cards Panel */
+        .cards-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .panel-card {
+            padding: 1.5rem;
+            border-radius: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        .panel-card h4 {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .etl-source-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--card-border);
+            font-size: 0.82rem;
+        }
+
+        .etl-source-item:last-child {
+            border-bottom: none;
+        }
+
+        .log-entry {
+            padding: 0.4rem 0;
+            font-size: 0.78rem;
+            font-family: 'Courier New', monospace;
+            color: var(--text-muted);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .log-entry .log-time {
+            color: var(--cyan);
+            margin-right: 0.5rem;
+        }
+
+        .log-entry .log-level {
+            margin-right: 0.5rem;
+            font-weight: 600;
+        }
+
+        .log-entry .log-level.info {
+            color: #3b82f6;
+        }
+
+        .log-entry .log-level.success {
+            color: #22c55e;
+        }
+
+        .log-entry .log-level.warn {
+            color: #f59e0b;
+        }
+
+        @media (max-width: 768px) {
+            .admin-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                display: none;
+            }
+
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-brand">
+                <div>
+                    <h2>ViksitNetra</h2>
+                    <small>ADMIN PANEL</small>
+                </div>
+            </div>
+            <button class="sidebar-link active" onclick="showPanel('overview')">
+                <span class="icon">📊</span> System Overview
+            </button>
+            <button class="sidebar-link" onclick="showPanel('etl')">
+                <span class="icon">🔄</span> ETL Pipeline
+            </button>
+            <button class="sidebar-link" onclick="showPanel('services')">
+                <span class="icon">⚙️</span> Services
+            </button>
+            <button class="sidebar-link" onclick="showPanel('data')">
+                <span class="icon">📡</span> Data Sources
+            </button>
+            <button class="sidebar-link" onclick="showPanel('security')">
+                <span class="icon">🔐</span> Security
+            </button>
+            <a class="sidebar-link" href="/">
+                <span class="icon">🏠</span> Back to Dashboard
+            </a>
+            <div class="sidebar-footer">
+                🇮🇳 ViksitNetra v1.0.0<br>
+                Sovereign AI Platform © 2026
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>⚙️ System Administration</h1>
+                <div class="header-meta">
+                    <span class="status-badge online">● All Systems Operational</span>
+                    <button class="btn-action" id="refreshBtn" onclick="refreshAll()">🔄 Refresh</button>
+                    <button class="btn-action" id="triggerETLBtn" onclick="triggerETL()">⚡ Run ETL</button>
+                </div>
+            </div>
+
+            <!-- System Metrics -->
+            <div class="metrics-grid" id="metricsGrid">
+                <div class="metric-card">
+                    <div class="metric-label">CPU Usage</div>
+                    <div class="metric-value" id="cpuValue" style="color:#3b82f6">—</div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" id="cpuBar" style="background:#3b82f6;width:0%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Memory Usage</div>
+                    <div class="metric-value" id="memValue" style="color:#a855f7">—</div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" id="memBar" style="background:#a855f7;width:0%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">GPU Usage</div>
+                    <div class="metric-value" id="gpuValue" style="color:#22c55e">—</div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" id="gpuBar" style="background:#22c55e;width:0%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Disk Usage</div>
+                    <div class="metric-value" id="diskValue" style="color:#f59e0b">—</div>
+                    <div class="metric-bar">
+                        <div class="metric-bar-fill" id="diskBar" style="background:#f59e0b;width:0%"></div>
+                    </div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">API Requests/Min</div>
+                    <div class="metric-value" id="apiReqValue" style="color:var(--saffron)">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">WebSocket Connections</div>
+                    <div class="metric-value" id="wsConnValue" style="color:var(--cyan)">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Avg Response Time</div>
+                    <div class="metric-value" id="respTimeValue" style="color:#22c55e">—</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-label">Error Rate</div>
+                    <div class="metric-value" id="errRateValue" style="color:#ef4444">—</div>
+                </div>
+            </div>
+
+            <!-- Services Table -->
+            <div class="data-section">
+                <h3>🏗️ Services Status</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Details</th>
+                            <th>Uptime</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTable">
+                        <tr>
+                            <td colspan="4" style="color:var(--text-muted)">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ETL & Logs -->
+            <div class="cards-row">
+                <div class="panel-card">
+                    <h4>🔄 ETL Pipeline Sources</h4>
+                    <div id="etlSourcesList">Loading...</div>
+                </div>
+                <div class="panel-card">
+                    <h4>📋 Recent Logs</h4>
+                    <div id="logsList">
+                        <div class="log-entry"><span class="log-time">10:25:00</span><span
+                                class="log-level success">OK</span>System initialized</div>
+                        <div class="log-entry"><span class="log-time">10:24:58</span><span
+                                class="log-level info">INFO</span>ETL pipeline starting...</div>
+                        <div class="log-entry"><span class="log-time">10:24:55</span><span
+                                class="log-level success">OK</span>All connectors registered</div>
+                        <div class="log-entry"><span class="log-time">10:24:50</span><span
+                                class="log-level info">INFO</span>FastAPI server started on :8000</div>
+                        <div class="log-entry"><span class="log-time">10:24:48</span><span
+                                class="log-level success">OK</span>WebSocket manager ready</div>
+                        <div class="log-entry"><span class="log-time">10:24:45</span><span
+                                class="log-level info">INFO</span>7 government data sources configured</div>
+                        <div class="log-entry"><span class="log-time">10:24:42</span><span
+                                class="log-level success">OK</span>CORS enabled for all origins</div>
+                        <div class="log-entry"><span class="log-time">10:24:40</span><span
+                                class="log-level info">INFO</span>ViksitNetra v1.0.0 — Sovereign AI Platform</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="/js/api.js"></script>
+    <script>
+        const API_BASE = window.location.origin + '/api/v1';
+
+        async function fetchJSON(path) {
+            try {
+                const res = await fetch(API_BASE + path);
+                return await res.json();
+            } catch (e) {
+                console.warn('API error:', e);
+                return null;
+            }
+        }
+
+        async function loadMetrics() {
+            const data = await fetchJSON('/admin/system');
+            if (!data) return;
+
+            // Update metric cards
+            document.getElementById('cpuValue').textContent = data.cpu_usage_pct + '%';
+            document.getElementById('cpuBar').style.width = data.cpu_usage_pct + '%';
+            document.getElementById('memValue').textContent = data.memory_usage_pct + '%';
+            document.getElementById('memBar').style.width = data.memory_usage_pct + '%';
+            document.getElementById('gpuValue').textContent = data.gpu_usage_pct + '%';
+            document.getElementById('gpuBar').style.width = data.gpu_usage_pct + '%';
+            document.getElementById('diskValue').textContent = data.disk_usage_pct + '%';
+            document.getElementById('diskBar').style.width = data.disk_usage_pct + '%';
+            document.getElementById('apiReqValue').textContent = data.api_requests_per_min.toLocaleString();
+            document.getElementById('wsConnValue').textContent = data.active_websockets.toLocaleString();
+            document.getElementById('respTimeValue').textContent = data.avg_response_time_ms + 'ms';
+            document.getElementById('errRateValue').textContent = data.error_rate_pct + '%';
+
+            // Update services table
+            const services = data.services || {};
+            const tbody = document.getElementById('servicesTable');
+            tbody.innerHTML = Object.entries(services).map(([name, info]) => `
+                <tr>
+                    <td><strong>${name.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</strong></td>
+                    <td><span class="status-dot ${info.status}"></span>${info.status}</td>
+                    <td style="color:var(--text-muted);font-size:0.78rem">${Object.entries(info).filter(([k]) => k !== 'status').map(([k, v]) => `${k}: ${v}`).join(' | ')}</td>
+                    <td style="color:#22c55e">99.9%</td>
+                </tr>
+            `).join('');
+
+            // Update ETL sources
+            const etl = data.etl_pipeline || {};
+            const connectors = etl.connectors || {};
+            const etlList = document.getElementById('etlSourcesList');
+            etlList.innerHTML = Object.entries(connectors).map(([name, info]) => `
+                <div class="etl-source-item">
+                    <span><span class="status-dot ${info.status === 'active' ? 'healthy' : 'degraded'}"></span>${name}</span>
+                    <span style="color:var(--text-muted)">Fetches: ${info.fetch_count} | Errors: ${info.error_count}</span>
+                </div>
+            `).join('');
+        }
+
+        async function triggerETL() {
+            const btn = document.getElementById('triggerETLBtn');
+            btn.disabled = true;
+            btn.textContent = '⏳ Running...';
+            const result = await fetchJSON('/etl/run');
+            if (result) {
+                btn.textContent = `✅ ${result.total_records || 0} records`;
+                addLog('success', 'OK', `ETL pipeline completed: ${result.total_records} records from ${Object.keys(result.sources || {}).length} sources`);
+            } else {
+                btn.textContent = '❌ Error';
+                addLog('warn', 'WARN', 'ETL pipeline failed');
+            }
+            setTimeout(() => { btn.disabled = false; btn.textContent = '⚡ Run ETL'; }, 3000);
+            await loadMetrics();
+        }
+
+        function addLog(level, label, message) {
+            const logs = document.getElementById('logsList');
+            const now = new Date().toLocaleTimeString('en-IN', { hour12: false });
+            const entry = document.createElement('div');
+            entry.className = 'log-entry';
+            entry.innerHTML = `<span class="log-time">${now}</span><span class="log-level ${level}">${label}</span>${message}`;
+            logs.insertBefore(entry, logs.firstChild);
+            if (logs.children.length > 20) logs.removeChild(logs.lastChild);
+        }
+
+        async function refreshAll() {
+            document.getElementById('refreshBtn').textContent = '⏳ Loading...';
+            await loadMetrics();
+            document.getElementById('refreshBtn').textContent = '🔄 Refresh';
+            addLog('info', 'INFO', 'Dashboard refreshed');
+        }
+
+        function showPanel(name) {
+            document.querySelectorAll('.sidebar-link').forEach(l => l.classList.remove('active'));
+            event.target.closest('.sidebar-link').classList.add('active');
+        }
+
+        // Initial load
+        loadMetrics();
+        setInterval(loadMetrics, 15000);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ViksitNetra | Emergency Portal</title>
+    <meta name="description"
+        content="Emergency contacts, survival guides, offline maps, and live danger zone headlines for Indian citizens." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="emergency.css" />
+</head>
+
+<body>
+    <header class="top-header">
+        <a href="index.html" class="header-brand">
+            <svg viewBox="0 0 24 24" fill="none" width="28" height="28">
+                <circle cx="12" cy="12" r="10" stroke="#FF9933" stroke-width="1.5" />
+                <circle cx="12" cy="12" r="3" fill="#FF9933" />
+                <line x1="12" y1="2" x2="12" y2="6" stroke="#138808" stroke-width="1.5" />
+                <line x1="12" y1="18" x2="12" y2="22" stroke="#138808" stroke-width="1.5" />
+            </svg>
+            <div><span class="brand-name">ViksitNetra</span><span class="brand-sub">Emergency Portal</span></div>
+        </a>
+        <div class="header-nav">
+            <a href="index.html" class="nav-link"><svg viewBox="0 0 24 24" width="14" height="14">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg><span>Dashboard</span></a>
+            <a href="complaints.html" class="nav-link"><svg viewBox="0 0 24 24" width="14" height="14">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                </svg><span>Complaints</span></a>
+            <a href="emergency.html" class="nav-link active"><svg viewBox="0 0 24 24" width="14" height="14">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg><span>Emergency</span></a>
+            <button class="logout-btn"
+                onclick="sessionStorage.removeItem('bharatjnana_session');location.href='login.html'">Logout</button>
+        </div>
+    </header>
+
+    <div class="emergency-banner" id="emergencyBanner">
+        <div class="banner-pulse"></div>
+        <span>🚨 EMERGENCY PORTAL — Stay Informed, Stay Prepared, Stay Safe</span>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Tab Navigation -->
+        <div class="em-tabs" id="emTabs">
+            <button class="em-tab active" onclick="switchEmTab('contacts')">📞 Emergency Contacts</button>
+            <button class="em-tab" onclick="switchEmTab('guides')">📖 Survival Guides</button>
+            <button class="em-tab" onclick="switchEmTab('maps')">🗺️ Offline Maps</button>
+            <button class="em-tab" onclick="switchEmTab('news')">📰 Live Headlines</button>
+        </div>
+
+        <!-- TAB 1: Emergency Contacts -->
+        <section class="em-section active" id="sec-contacts">
+            <h2 class="section-title">🆘 Emergency Contacts India</h2>
+            <p class="section-desc">Save these numbers. They could save your life.</p>
+            <div class="contacts-grid" id="contactsGrid"></div>
+        </section>
+
+        <!-- TAB 2: Survival Guides -->
+        <section class="em-section" id="sec-guides">
+            <h2 class="section-title">📖 Emergency Survival Guides</h2>
+            <p class="section-desc">Click on any scenario to view the step-by-step survival guide.</p>
+            <div class="guides-grid" id="guidesGrid"></div>
+            <div class="guide-detail-modal" id="guideModal">
+                <div class="guide-detail-card">
+                    <button class="guide-close" onclick="closeGuide()">&times;</button>
+                    <div id="guideContent"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: Offline Maps -->
+        <section class="em-section" id="sec-maps">
+            <h2 class="section-title">🗺️ Offline Emergency Maps</h2>
+            <p class="section-desc">Key locations for shelters, hospitals, and safe zones across India. Save or
+                screenshot these for offline use.</p>
+            <div class="maps-grid" id="mapsGrid"></div>
+        </section>
+
+        <!-- TAB 4: Live News Headlines -->
+        <section class="em-section" id="sec-news">
+            <h2 class="section-title">📰 Live Emergency Headlines</h2>
+            <p class="section-desc">Real-time news related to calamities, wars, emergencies, and danger zones in India.
+            </p>
+            <div class="news-filters">
+                <button class="news-filter active" onclick="filterNews(this,'all')">All</button>
+                <button class="news-filter" onclick="filterNews(this,'disaster')">🌊 Disasters</button>
+                <button class="news-filter" onclick="filterNews(this,'war')">⚔️ Conflict</button>
+                <button class="news-filter" onclick="filterNews(this,'emergency')">🚨 Emergency</button>
+            </div>
+            <div class="news-ticker" id="newsTicker">
+                <div class="ticker-loading">
+                    <div class="spinner"></div> Fetching live headlines...
+                </div>
+            </div>
+            <div class="news-grid" id="newsGrid">
+                <div class="news-loading">
+                    <div class="spinner"></div>
+                    <p>Loading emergency headlines from NewsData API...</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="em-footer">
+        <div class="tricolor-line"><span></span><span></span><span></span></div>
+        <p>&copy; 2026 ViksitNetra | Emergency Portal | Stay Safe India 🇮🇳</p>
+    </footer>
+
+    <script src="emergency.js"></script>
+</body>
+
+</html>

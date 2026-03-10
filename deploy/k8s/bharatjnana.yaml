@@ -1,0 +1,210 @@
+# ViksitNetra — Kubernetes Namespace
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: viksitnetra
+  labels:
+    app: viksitnetra-graph
+    environment: production
+    sovereign: "true"
+
+---
+# ConfigMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: viksitnetra-config
+  namespace: viksitnetra
+data:
+  APP_NAME: "ViksitNetra"
+  DEBUG: "false"
+  NEO4J_URI: "bolt://neo4j-service:7687"
+  REDIS_URL: "redis://redis-service:6379/0"
+  ETL_POLL_INTERVAL_SECONDS: "300"
+
+---
+# Secret
+apiVersion: v1
+kind: Secret
+metadata:
+  name: viksitnetra-secrets
+  namespace: viksitnetra
+type: Opaque
+stringData:
+  SECRET_KEY: "viksitnetra-prod-sovereign-key-2026"
+  NEO4J_PASSWORD: "viksitnetra2026"
+  DATA_GOV_IN_API_KEY: "579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b"
+
+---
+# Backend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viksitnetra-backend
+  namespace: viksitnetra
+  labels:
+    app: viksitnetra-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: viksitnetra-backend
+  template:
+    metadata:
+      labels:
+        app: viksitnetra-backend
+    spec:
+      containers:
+        - name: backend
+          image: viksitnetra/backend:latest
+          ports:
+            - containerPort: 8000
+          envFrom:
+            - configMapRef:
+                name: viksitnetra-config
+            - secretRef:
+                name: viksitnetra-secrets
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000
+            initialDelaySeconds: 30
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /api/v1/health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+---
+# Backend Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend-service
+  namespace: viksitnetra
+spec:
+  selector:
+    app: viksitnetra-backend
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: ClusterIP
+
+---
+# Frontend Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viksitnetra-frontend
+  namespace: viksitnetra
+  labels:
+    app: viksitnetra-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: viksitnetra-frontend
+  template:
+    metadata:
+      labels:
+        app: viksitnetra-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: viksitnetra/frontend:latest
+          ports:
+            - containerPort: 80
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "100m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+
+---
+# Frontend Service (LoadBalancer for external access)
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service
+  namespace: viksitnetra
+spec:
+  selector:
+    app: viksitnetra-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer
+
+---
+# HPA — Auto-scaling for backend
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: viksitnetra-backend-hpa
+  namespace: viksitnetra
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: viksitnetra-backend
+  minReplicas: 3
+  maxReplicas: 50
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
+    - type: Resource
+      resource:
+        name: memory
+        target:
+          type: Utilization
+          averageUtilization: 80
+
+---
+# Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: viksitnetra-ingress
+  namespace: viksitnetra
+  annotations:
+    nginx.ingress.kubernetes.io/websocket-services: "backend-service"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "86400"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+spec:
+  rules:
+    - host: viksitnetra.gov.in
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: backend-service
+                port:
+                  number: 8000
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: frontend-service
+                port:
+                  number: 80
+  tls:
+    - hosts:
+        - viksitnetra.gov.in
+      secretName: viksitnetra-tls

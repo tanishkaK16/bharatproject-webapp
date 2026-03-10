@@ -1,0 +1,323 @@
+2026-03-04 10:38:50.385 | INFO     | app.main:lifespan:28 - ============================================================
+2026-03-04 10:38:50.385 | INFO     | app.main:lifespan:29 - 🇮🇳 BharatJnana Graph — Starting Sovereign AI Platform
+2026-03-04 10:38:50.385 | INFO     | app.main:lifespan:30 - ============================================================
+2026-03-04 10:38:50.385 | INFO     | app.main:lifespan:34 - [Startup] Running initial ETL pipeline...
+2026-03-04 10:38:50.385 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:38:50.385 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:38:50.386 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:38:50.386 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:38:50.413 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:38:50.424 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:38:50.659 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:38:50.660 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:38:50.660 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:38:50.660 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:38:50.678 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:38:50.692 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:38:50.705 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:38:51.104 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:38:51.105 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:38:51.105 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:38:51.169 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:38:51.169 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:38:51.229 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:38:51.229 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:38:51.302 | WARNING  | app.etl.connectors.data_gov_in:fetch:58 - [DataGovIn] API fetch failed: Client error '429 Too Many Requests' for url 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&limit=100&offset=0'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429, returning sample data
+2026-03-04 10:38:51.302 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 8 records
+2026-03-04 10:38:51.302 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 8 records
+2026-03-04 10:38:51.594 | WARNING  | app.etl.connectors.gov_connectors:fetch:147 - [ECI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:38:51.594 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:38:51.594 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:39:21.161 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:39:21.163 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:39:21.163 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:39:21.164 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 49 records processed.
+2026-03-04 10:39:21.164 | INFO     | app.main:lifespan:36 - [Startup] ETL complete: 49 records ingested
+2026-03-04 10:44:21.165 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 10:44:21.166 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:44:21.166 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:44:21.166 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:44:21.166 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:44:21.166 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:44:21.166 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:44:21.353 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:44:21.354 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:44:21.713 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:44:21.713 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:44:21.713 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:44:21.714 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:44:21.714 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:44:21.746 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:44:21.746 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:44:21.863 | WARNING  | app.etl.connectors.data_gov_in:fetch:58 - [DataGovIn] API fetch failed: Client error '429 Too Many Requests' for url 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&limit=100&offset=0'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429, returning sample data
+2026-03-04 10:44:21.863 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 8 records
+2026-03-04 10:44:21.863 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 8 records
+2026-03-04 10:44:22.027 | WARNING  | app.etl.connectors.gov_connectors:fetch:147 - [ECI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:44:22.027 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:44:22.027 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:44:51.614 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:44:51.615 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:44:51.615 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:44:51.615 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 49 records processed.
+2026-03-04 10:45:07.312 | INFO     | app.main:lifespan:46 - [Shutdown] Cleaning up resources...
+2026-03-04 10:45:07.313 | INFO     | app.main:lifespan:49 - [Shutdown] BharatJnana Graph stopped.
+2026-03-04 10:45:07.679 | INFO     | app.main:lifespan:28 - ============================================================
+2026-03-04 10:45:07.679 | INFO     | app.main:lifespan:29 - 🇮🇳 BharatJnana Graph — Starting Sovereign AI Platform
+2026-03-04 10:45:07.679 | INFO     | app.main:lifespan:30 - ============================================================
+2026-03-04 10:45:07.679 | INFO     | app.main:lifespan:34 - [Startup] Running initial ETL pipeline...
+2026-03-04 10:45:07.679 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:45:07.679 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:45:07.679 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:45:07.679 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:45:07.707 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:45:07.719 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:45:07.908 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:45:07.908 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:45:07.908 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:45:07.909 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:45:07.945 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:45:07.962 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:45:07.973 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:45:08.227 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:45:08.227 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:45:08.262 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:45:08.262 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:45:08.262 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:45:08.435 | WARNING  | app.etl.connectors.data_gov_in:fetch:58 - [DataGovIn] API fetch failed: Client error '429 Too Many Requests' for url 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&limit=100&offset=0'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429, returning sample data
+2026-03-04 10:45:08.435 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 8 records
+2026-03-04 10:45:08.435 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 8 records
+2026-03-04 10:45:08.534 | WARNING  | app.etl.connectors.gov_connectors:fetch:147 - [ECI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:45:08.534 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:45:08.534 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:45:09.519 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:45:09.520 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:45:38.347 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:45:38.348 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:45:38.349 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:45:38.349 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 49 records processed.
+2026-03-04 10:45:38.350 | INFO     | app.main:lifespan:36 - [Startup] ETL complete: 49 records ingested
+2026-03-04 10:45:38.798 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:50:38.352 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 10:50:38.352 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:50:38.352 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:50:38.352 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:50:38.352 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:50:38.353 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:50:38.353 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:50:38.591 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:50:38.592 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:50:38.880 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:50:38.881 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:50:38.881 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:50:38.924 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:50:38.924 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:50:38.965 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:50:38.966 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:50:38.995 | WARNING  | app.etl.connectors.data_gov_in:fetch:58 - [DataGovIn] API fetch failed: Client error '429 Too Many Requests' for url 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=579b464db66ec23bdd000001cdd3946e44ce4aad7209ff7b23ac571b&format=json&limit=100&offset=0'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/429, returning sample data
+2026-03-04 10:50:38.995 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 8 records
+2026-03-04 10:50:38.995 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 8 records
+2026-03-04 10:50:39.097 | WARNING  | app.etl.connectors.gov_connectors:fetch:147 - [ECI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:50:39.097 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:50:39.097 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:51:08.975 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:51:08.975 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:51:08.975 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:51:08.976 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 49 records processed.
+2026-03-04 10:51:13.147 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:51:13.148 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:51:13.148 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:51:13.148 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:51:13.149 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:51:13.150 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:51:13.318 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:51:13.319 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:51:13.319 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:51:13.319 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:51:13.320 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:51:13.321 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:51:13.321 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:51:13.605 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:51:13.605 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:51:13.605 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:51:13.626 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:51:13.626 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:51:13.728 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:51:13.728 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:51:13.876 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 10:51:13.877 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 10:51:13.877 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 10:51:13.884 | WARNING  | app.etl.connectors.gov_connectors:fetch:147 - [ECI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:51:13.885 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:51:13.885 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:51:43.580 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:51:43.581 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:51:43.581 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:51:43.581 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 10:51:43.793 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:56:08.977 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 10:56:08.979 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 10:56:08.979 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 10:56:08.979 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 10:56:08.979 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 10:56:08.980 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 10:56:08.981 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 10:56:09.153 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 10:56:09.154 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 10:56:09.154 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 10:56:09.154 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 10:56:09.154 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 10:56:09.155 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 10:56:09.155 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 10:56:09.569 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 10:56:09.570 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 10:56:09.570 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 10:56:09.775 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 10:56:09.776 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 10:56:09.800 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 10:56:09.801 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 10:56:09.848 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 10:56:09.848 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 10:56:09.849 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 10:56:10.007 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 10:56:10.007 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 10:56:39.693 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 10:56:39.694 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 10:56:39.695 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 10:56:39.695 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 11:01:39.697 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 11:01:39.699 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 11:01:39.699 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 11:01:39.699 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 11:01:39.700 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 11:01:39.703 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 11:01:39.706 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 11:01:39.900 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 11:01:39.901 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 11:01:39.901 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 11:01:39.901 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 11:01:39.902 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 11:01:39.903 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 11:01:39.904 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 11:01:40.245 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 11:01:40.245 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 11:01:40.245 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 11:01:40.286 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 11:01:40.286 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 11:01:40.305 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 11:01:40.306 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 11:01:40.623 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 11:01:40.624 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 11:01:41.723 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 11:01:41.723 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 11:01:41.724 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 11:02:10.266 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 11:02:10.268 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 11:02:10.268 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 11:02:10.268 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 11:07:10.269 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 11:07:10.270 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 11:07:10.270 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 11:07:10.270 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 11:07:10.270 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 11:07:10.271 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 11:07:10.271 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 11:07:10.555 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 11:07:10.555 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 11:07:10.556 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 11:07:10.556 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 11:07:10.557 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 11:07:10.558 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 11:07:10.558 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 11:07:11.233 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 11:07:11.234 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 11:07:11.234 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 11:07:11.349 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 11:07:11.349 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 11:07:11.365 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 11:07:11.365 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 11:07:11.715 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 11:07:11.716 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 11:07:11.857 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 11:07:11.857 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 11:07:11.858 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 11:07:41.357 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 11:07:41.359 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 11:07:41.359 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 11:07:41.359 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 11:12:41.362 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 11:12:41.363 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 11:12:41.364 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 11:12:41.364 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 11:12:41.364 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 11:12:41.365 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 11:12:41.366 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 11:12:41.539 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 11:12:41.539 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 11:12:41.540 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 11:12:41.540 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 11:12:41.541 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 11:12:41.541 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 11:12:41.542 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 11:12:41.923 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 11:12:41.923 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 11:12:41.930 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 11:12:41.931 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 11:12:41.931 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 11:12:41.952 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 11:12:41.952 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 11:12:42.067 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 11:12:42.068 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 11:12:43.642 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 11:12:43.643 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 11:12:43.644 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 11:13:11.800 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 11:13:11.800 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 11:13:11.800 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 11:13:11.800 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 11:15:47.830 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 11:18:11.802 | INFO     | app.main:background_etl_scheduler:57 - [Scheduler] Running periodic ETL cycle...
+2026-03-04 11:18:11.804 | INFO     | app.etl.pipeline:run_all:41 - ============================================================
+2026-03-04 11:18:11.804 | INFO     | app.etl.pipeline:run_all:42 - [ETL Pipeline] Starting full data ingestion cycle...
+2026-03-04 11:18:11.804 | INFO     | app.etl.pipeline:run_all:43 - ============================================================
+2026-03-04 11:18:11.804 | INFO     | app.etl.connectors.base:execute:57 - [ETL:data_gov_in] Starting data fetch...
+2026-03-04 11:18:11.806 | INFO     | app.etl.connectors.base:execute:57 - [ETL:imd_mausam] Starting data fetch...
+2026-03-04 11:18:11.807 | INFO     | app.etl.connectors.base:execute:57 - [ETL:pib_rss] Starting data fetch...
+2026-03-04 11:18:11.970 | INFO     | app.etl.connectors.pib_rss:fetch:45 - [PIB] Fetched 0 news items from pib_english
+2026-03-04 11:18:11.971 | INFO     | app.etl.connectors.base:execute:59 - [ETL:pib_rss] Fetched 6 records
+2026-03-04 11:18:11.971 | INFO     | app.etl.connectors.base:execute:62 - [ETL:pib_rss] Transformed 6 records
+2026-03-04 11:18:11.971 | INFO     | app.etl.connectors.base:execute:57 - [ETL:ndap_niti] Starting data fetch...
+2026-03-04 11:18:11.972 | INFO     | app.etl.connectors.base:execute:57 - [ETL:mospi] Starting data fetch...
+2026-03-04 11:18:11.972 | INFO     | app.etl.connectors.base:execute:57 - [ETL:bhuvan_isro] Starting data fetch...
+2026-03-04 11:18:11.972 | INFO     | app.etl.connectors.base:execute:57 - [ETL:eci] Starting data fetch...
+2026-03-04 11:18:12.290 | WARNING  | app.etl.connectors.gov_connectors:fetch:66 - [MOSPI] API unavailable: Expecting value: line 1 column 1 (char 0)
+2026-03-04 11:18:12.290 | INFO     | app.etl.connectors.base:execute:59 - [ETL:mospi] Fetched 6 records
+2026-03-04 11:18:12.290 | INFO     | app.etl.connectors.base:execute:62 - [ETL:mospi] Transformed 6 records
+2026-03-04 11:18:12.371 | INFO     | app.etl.connectors.base:execute:59 - [ETL:imd_mausam] Fetched 10 records
+2026-03-04 11:18:12.371 | INFO     | app.etl.connectors.base:execute:62 - [ETL:imd_mausam] Transformed 10 records
+2026-03-04 11:18:12.608 | INFO     | app.etl.connectors.base:execute:59 - [ETL:eci] Fetched 6 records
+2026-03-04 11:18:12.608 | INFO     | app.etl.connectors.base:execute:62 - [ETL:eci] Transformed 6 records
+2026-03-04 11:18:12.609 | INFO     | app.etl.connectors.data_gov_in:fetch:55 - [DataGovIn] Fetched 10 records from resource 9ef84268-d588-465a-a308-a864a43d0070
+2026-03-04 11:18:12.609 | INFO     | app.etl.connectors.base:execute:59 - [ETL:data_gov_in] Fetched 10 records
+2026-03-04 11:18:12.610 | INFO     | app.etl.connectors.base:execute:62 - [ETL:data_gov_in] Transformed 10 records
+2026-03-04 11:18:12.675 | INFO     | app.etl.connectors.base:execute:59 - [ETL:ndap_niti] Fetched 8 records
+2026-03-04 11:18:12.675 | INFO     | app.etl.connectors.base:execute:62 - [ETL:ndap_niti] Transformed 8 records
+2026-03-04 11:18:42.291 | WARNING  | app.etl.connectors.gov_connectors:fetch:107 - [Bhuvan] WMS unavailable: 
+2026-03-04 11:18:42.292 | INFO     | app.etl.connectors.base:execute:59 - [ETL:bhuvan_isro] Fetched 5 records
+2026-03-04 11:18:42.292 | INFO     | app.etl.connectors.base:execute:62 - [ETL:bhuvan_isro] Transformed 5 records
+2026-03-04 11:18:42.292 | INFO     | app.etl.pipeline:run_all:79 - [ETL Pipeline] Cycle complete. 51 records processed.
+2026-03-04 11:20:57.505 | INFO     | app.main:lifespan:46 - [Shutdown] Cleaning up resources...
+2026-03-04 11:20:57.508 | INFO     | app.main:lifespan:49 - [Shutdown] BharatJnana Graph stopped.

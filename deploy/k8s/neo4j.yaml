@@ -1,0 +1,55 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: neo4j-graph
+  namespace: viksitnetra-prod
+spec:
+  serviceName: "neo4j-service"
+  replicas: 3 # Sovereign cluster size
+  selector:
+    matchLabels:
+      app: neo4j
+  template:
+    metadata:
+      labels:
+        app: neo4j
+    spec:
+      containers:
+      - name: neo4j
+        image: neo4j:5.20.0
+        ports:
+        - containerPort: 7474
+          name: browser
+        - containerPort: 7687
+          name: bolt
+        env:
+        - name: NEO4J_AUTH
+          valueFrom:
+            secretKeyRef:
+              name: viksitnetra-secrets
+              key: neo4j-auth-string
+        volumeMounts:
+        - name: neo4j-data
+          mountPath: /data
+  volumeClaimTemplates:
+  - metadata:
+      name: neo4j-data
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      storageClassName: "yotta-fast-nvme"
+      resources:
+        requests:
+          storage: 1000Gi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo4j-service
+  namespace: viksitnetra-prod
+spec:
+  clusterIP: None
+  selector:
+    app: neo4j
+  ports:
+  - port: 7687
+    name: bolt

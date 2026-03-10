@@ -1,0 +1,2263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ViksitNetra | Viksit Bharat Intelligence Eye</title>
+    <meta name="description"
+        content="India's sovereign AI-powered knowledge graph platform for governance, strategic decision-making, and citizen empowerment." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+    <!-- ===== GOVERNMENT HEADER ===== -->
+    <header class="gov-header" id="govHeader">
+        <div class="gov-header-left">
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="3" y1="6" x2="21" y2="6" />
+                    <line x1="3" y1="12" x2="21" y2="12" />
+                    <line x1="3" y1="18" x2="21" y2="18" />
+                </svg>
+            </button>
+            <div class="brand-logo">
+                <svg viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" stroke="#FF9933" stroke-width="1.5" />
+                    <circle cx="12" cy="12" r="3" fill="#FF9933" />
+                    <line x1="12" y1="2" x2="12" y2="6" stroke="#138808" stroke-width="1.5" />
+                    <line x1="12" y1="18" x2="12" y2="22" stroke="#138808" stroke-width="1.5" />
+                    <line x1="2" y1="12" x2="6" y2="12" stroke="#138808" stroke-width="1.5" />
+                    <line x1="18" y1="12" x2="22" y2="12" stroke="#138808" stroke-width="1.5" />
+                </svg>
+            </div>
+            <div class="brand-title">
+                <span class="name">ViksitNetra</span>
+                <span class="subtitle">Viksit Bharat Intelligence Eye</span>
+            </div>
+            <div class="tricolor"><span></span><span></span><span></span></div>
+        </div>
+        <div class="gov-header-right">
+            <select class="header-lang-select" id="headerLangSelect">
+                <option value="en">English</option>
+                <option value="hi">हिंदी</option>
+                <option value="mr">मराठी</option>
+                <option value="ta">தமிழ்</option>
+                <option value="te">తెలుగు</option>
+                <option value="bn">বাংলা</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="kn">ಕನ್ನಡ</option>
+            </select>
+            <button class="header-notif-btn" id="notifBtn" aria-label="Notifications">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                    <path d="M13.73 21a2 2 0 01-3.46 0" />
+                </svg>
+                <span class="notif-dot"></span>
+            </button>
+            <a href="login.html" class="header-notif-btn" title="Login / Logout"
+                style="text-decoration:none;display:flex;align-items:center;gap:4px;font-size:0.72rem;color:var(--text-secondary)">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+            </a>
+            <div class="header-profile" id="headerProfile">
+                <div class="avatar" id="headerAvatar">AK</div>
+                <span class="profile-name" id="headerProfileName">Admin</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ===== SIDEBAR ===== -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <nav class="sidebar" id="sidebar">
+        <div class="sidebar-nav">
+            <div class="sidebar-section-label">Main</div>
+            <div class="sidebar-item active" data-page="dashboard" onclick="switchPage('dashboard')">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="7" height="7" rx="1" />
+                    <rect x="14" y="3" width="7" height="7" rx="1" />
+                    <rect x="3" y="14" width="7" height="7" rx="1" />
+                    <rect x="14" y="14" width="7" height="7" rx="1" />
+                </svg>
+                Dashboard
+            </div>
+            <div class="sidebar-item" data-page="graph" onclick="switchPage('graph')">
+                <svg viewBox="0 0 24 24">
+                    <circle cx="12" cy="5" r="3" />
+                    <circle cx="5" cy="19" r="3" />
+                    <circle cx="19" cy="19" r="3" />
+                    <line x1="12" y1="8" x2="5" y2="16" />
+                    <line x1="12" y1="8" x2="19" y2="16" />
+                </svg>
+                Knowledge Graph
+            </div>
+            <div class="sidebar-item" data-page="copilot" onclick="switchPage('copilot')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2a10 10 0 0110 10 10 10 0 01-10 10A10 10 0 012 12 10 10 0 0112 2z" />
+                    <path d="M12 8v4l3 3" stroke-linecap="round" />
+                </svg>
+                AI Co-Pilot
+            </div>
+            <div class="sidebar-section-label">Services</div>
+            <div class="sidebar-item" data-page="citizen" onclick="switchPage('citizen')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                    <path d="M16 3.13a4 4 0 010 7.75" />
+                </svg>
+                Citizen Services <span class="badge">3</span>
+            </div>
+            <div class="sidebar-item" data-page="grievance" onclick="switchPage('grievance')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                    <polyline points="14 2 14 8 20 8" />
+                    <line x1="16" y1="13" x2="8" y2="13" />
+                    <line x1="16" y1="17" x2="8" y2="17" />
+                </svg>
+                Grievance Tracker <span class="badge">7</span>
+            </div>
+            <div class="sidebar-item" data-page="evoting" onclick="switchPage('evoting')">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                    <path d="M9 16l2 2 4-4" />
+                </svg>
+                E-Voting
+            </div>
+            <div class="sidebar-item" data-page="reports" onclick="switchPage('reports')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                </svg>
+                Reports
+            </div>
+            <div class="sidebar-section-label">Advanced Intelligence</div>
+            <div class="sidebar-item" data-page="policy-sim" onclick="switchPage('policy-sim')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M2 20h20" />
+                    <path d="M5 20V8l3-3h4l3 3v12" />
+                    <path d="M10 20V8" />
+                    <path d="M16 20v-5l3-3" />
+                    <path d="M19 12v8" />
+                </svg>
+                Policy Simulator <span class="badge" style="background:rgba(168,85,247,0.2);color:#a855f7">AI</span>
+            </div>
+            <div class="sidebar-item" data-page="scorecard" onclick="switchPage('scorecard')">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <path d="M3 9h18" />
+                    <path d="M9 21V9" />
+                    <path d="M13 13l2 2 4-4" />
+                </svg>
+                District Scorecard <span class="badge" style="background:rgba(34,197,94,0.2);color:#22c55e">2047</span>
+            </div>
+            <div class="sidebar-item" data-page="citizen-data" onclick="switchPage('citizen-data')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    <path d="M9 12l2 2 4-4" />
+                </svg>
+                Citizen Data Hub <span class="badge" style="background:rgba(59,130,246,0.2);color:#3b82f6">Live</span>
+            </div>
+            <div class="sidebar-item" data-page="village-ai" onclick="switchPage('village-ai')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                    <path d="M2 17l10 5 10-5" />
+                    <path d="M2 12l10 5 10-5" />
+                </svg>
+                Village AI Agent <span class="badge"
+                    style="background:rgba(245,158,11,0.2);color:#f59e0b">Offline</span>
+            </div>
+            <div class="sidebar-item" data-page="smart-grievance" onclick="switchPage('smart-grievance')">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="3" width="18" height="18" rx="2" />
+                    <circle cx="8.5" cy="8.5" r="1.5" />
+                    <path d="M21 15l-5-5L5 21" />
+                </svg>
+                Smart Grievance <span class="badge" style="background:rgba(6,182,212,0.2);color:#06b6d4">Vision</span>
+            </div>
+            <div class="sidebar-item" data-page="warroom" onclick="switchPage('warroom')">
+                <svg viewBox="0 0 24 24">
+                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                    <circle cx="12" cy="16" r="1" />
+                </svg>
+                War Room <span class="badge" style="background:rgba(239,68,68,0.2);color:#ef4444">🔒</span>
+            </div>
+            <div class="sidebar-item" data-page="scheme-outreach" onclick="switchPage('scheme-outreach')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M22 2L11 13" />
+                    <path d="M22 2L15 22l-4-9-9-4z" />
+                </svg>
+                Scheme Outreach <span class="badge" style="background:rgba(16,185,129,0.2);color:#10b981">22 Lang</span>
+            </div>
+            <div class="sidebar-item" data-page="my-schemes" onclick="switchPage('my-schemes')">
+                <svg viewBox="0 0 24 24">
+                    <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                    <circle cx="12" cy="7" r="4" />
+                    <path d="M16 11l2 2 4-4" />
+                </svg>
+                My Schemes <span class="badge" style="background:rgba(255,153,51,0.2);color:#FF9933">₹</span>
+            </div>
+            <div class="sidebar-section-label">Citizen Portal</div>
+            <div class="sidebar-item" onclick="window.location.href='complaints.html'">
+                <svg viewBox="0 0 24 24">
+                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                </svg>
+                Complaints <span class="badge" style="background:rgba(245,158,11,0.2);color:#f59e0b">New</span>
+            </div>
+            <div class="sidebar-item" onclick="window.location.href='emergency.html'">
+                <svg viewBox="0 0 24 24">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                    <line x1="12" y1="9" x2="12" y2="13" />
+                    <line x1="12" y1="17" x2="12.01" y2="17" />
+                </svg>
+                Emergency <span class="badge" style="background:rgba(239,68,68,0.2);color:#ef4444">SOS</span>
+            </div>
+            <div class="sidebar-section-label">Account</div>
+            <div class="sidebar-item" onclick="window.location.href='login.html'">
+                <svg viewBox="0 0 24 24">
+                    <path d="M15 3h4a2 2 0 012 2v14a2 2 0 01-2 2h-4" />
+                    <polyline points="10 17 15 12 10 7" />
+                    <line x1="15" y1="12" x2="3" y2="12" />
+                </svg>
+                Login / Register
+            </div>
+        </div>
+        <div class="sidebar-footer">
+            <div class="live-indicator">
+                <div class="pulse-dot"></div> System Online &bull; v1.0
+            </div>
+        </div>
+    </nav>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content" id="mainContent">
+
+        <!-- PAGE 1: DASHBOARD -->
+        <section class="page-view active" id="page-dashboard">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Dashboard</div>
+                    <h1>National Command Dashboard</h1>
+                </div>
+                <div style="display:flex;gap:0.5rem;">
+                    <button class="btn-secondary" onclick="switchPage('graph')"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="5" r="3" />
+                            <circle cx="5" cy="19" r="3" />
+                            <circle cx="19" cy="19" r="3" />
+                            <line x1="12" y1="8" x2="5" y2="16" />
+                            <line x1="12" y1="8" x2="19" y2="16" />
+                        </svg> Explore Graph</button>
+                    <button class="btn-primary" onclick="switchPage('copilot')"><svg width="14" height="14"
+                            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <path d="M12 8v4l3 3" />
+                        </svg> AI Co-Pilot</button>
+                </div>
+            </div>
+            <!-- KPI -->
+            <div class="kpi-grid" id="kpiGrid">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(255,153,51,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#FF9933" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                                <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                                <path d="M16 3.13a4 4 0 010 7.75" />
+                            </svg></div>
+                        <div class="kpi-trend up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            </svg> 12.4%</div>
+                    </div>
+                    <div class="kpi-value" data-target="1247832">0</div>
+                    <div class="kpi-label">Active Users</div>
+                    <div class="kpi-sparkline"><svg viewBox="0 0 80 30" preserveAspectRatio="none">
+                            <polyline points="0,25 15,20 30,22 45,10 60,14 75,5 80,8" fill="none" stroke="#FF9933"
+                                stroke-width="2" />
+                        </svg></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(19,136,8,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#138808" stroke-width="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg></div>
+                        <div class="kpi-trend up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            </svg> 40%</div>
+                    </div>
+                    <div class="kpi-value" data-target="98432">0</div>
+                    <div class="kpi-label">Grievances Resolved</div>
+                    <div class="kpi-sparkline"><svg viewBox="0 0 80 30" preserveAspectRatio="none">
+                            <polyline points="0,28 15,22 30,18 45,12 60,8 75,4 80,3" fill="none" stroke="#138808"
+                                stroke-width="2" />
+                        </svg></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path
+                                    d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                            </svg></div>
+                        <div class="kpi-trend up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            </svg> 2.3M</div>
+                    </div>
+                    <div class="kpi-value" data-target="457800000" data-suffix="M">0</div>
+                    <div class="kpi-label">Graph Connections</div>
+                    <div class="kpi-sparkline"><svg viewBox="0 0 80 30" preserveAspectRatio="none">
+                            <polyline points="0,20 15,18 30,15 45,13 60,10 75,7 80,5" fill="none" stroke="#3B82F6"
+                                stroke-width="2" />
+                        </svg></div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(139,92,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#8B5CF6" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg></div>
+                        <div class="kpi-trend up"><svg width="10" height="10" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="3">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            </svg> &lt;5s</div>
+                    </div>
+                    <div class="kpi-value" data-target="18432">0</div>
+                    <div class="kpi-label">AI Queries / Hour</div>
+                    <div class="kpi-sparkline"><svg viewBox="0 0 80 30" preserveAspectRatio="none">
+                            <polyline points="0,22 15,19 30,16 45,14 60,11 75,7 80,6" fill="none" stroke="#8B5CF6"
+                                stroke-width="2" />
+                        </svg></div>
+                </div>
+            </div>
+            <!-- Dashboard cards -->
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg> India Governance Heatmap</h3>
+                        <div style="display:flex;gap:0.25rem"><button class="chip-btn active">All States</button><button
+                                class="chip-btn">Alerts</button><button class="chip-btn">Projects</button></div>
+                    </div>
+                    <div class="governance-map-container"><img src="india_map_bg.png" alt="Governance Map"
+                            class="governance-map" />
+                        <div class="map-pins">
+                            <div class="map-pin" style="top:22%;left:40%">
+                                <div class="pin-dot capital"></div>
+                                <div class="pin-tooltip">New Delhi<br />34 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:52%;left:18%">
+                                <div class="pin-dot high"></div>
+                                <div class="pin-tooltip">Mumbai<br />28 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:60%;left:38%">
+                                <div class="pin-dot medium"></div>
+                                <div class="pin-tooltip">Bengaluru<br />19 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:50%;left:60%">
+                                <div class="pin-dot high"></div>
+                                <div class="pin-tooltip">Kolkata<br />22 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:47%;left:45%">
+                                <div class="pin-dot medium"></div>
+                                <div class="pin-tooltip">Hyderabad<br />17 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:26%;left:28%">
+                                <div class="pin-dot low"></div>
+                                <div class="pin-tooltip">Jaipur<br />12 Active Projects</div>
+                            </div>
+                            <div class="map-pin" style="top:32%;left:52%">
+                                <div class="pin-dot high"></div>
+                                <div class="pin-tooltip">Lucknow<br />31 Active Projects</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="map-legend"><span><span class="legend-dot"
+                                style="background:#FF9933"></span>Capital</span><span><span class="legend-dot"
+                                style="background:#ef4444"></span>High Priority</span><span><span class="legend-dot"
+                                style="background:#f59e0b"></span>Medium</span><span><span class="legend-dot"
+                                style="background:#22c55e"></span>Low</span></div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg> Sector Activity</h3>
+                    </div>
+                    <div class="bar-chart">
+                        <div class="bar-item"><span class="bar-label">Geopolitics</span>
+                            <div class="bar-track">
+                                <div class="bar-fill"
+                                    style="width:82%;background:linear-gradient(90deg,#FF9933,#ff6b00)">82%</div>
+                            </div>
+                        </div>
+                        <div class="bar-item"><span class="bar-label">Economics</span>
+                            <div class="bar-track">
+                                <div class="bar-fill"
+                                    style="width:75%;background:linear-gradient(90deg,#138808,#00a86b)">75%</div>
+                            </div>
+                        </div>
+                        <div class="bar-item"><span class="bar-label">Defense</span>
+                            <div class="bar-track">
+                                <div class="bar-fill"
+                                    style="width:68%;background:linear-gradient(90deg,#3b82f6,#60a5fa)">68%</div>
+                            </div>
+                        </div>
+                        <div class="bar-item"><span class="bar-label">Climate</span>
+                            <div class="bar-track">
+                                <div class="bar-fill"
+                                    style="width:91%;background:linear-gradient(90deg,#a855f7,#c084fc)">91%</div>
+                            </div>
+                        </div>
+                        <div class="bar-item"><span class="bar-label">Civic</span>
+                            <div class="bar-track">
+                                <div class="bar-fill"
+                                    style="width:59%;background:linear-gradient(90deg,#f59e0b,#fbbf24)">59%</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1.5rem">
+                        <div class="dash-card-header">
+                            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
+                                </svg> Grievance Status</h3>
+                        </div>
+                        <div class="donut-row">
+                            <div class="donut-container"><svg viewBox="0 0 120 120" class="donut-svg">
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#1e293b" stroke-width="18" />
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#22c55e" stroke-width="18"
+                                        stroke-dasharray="188 126" stroke-dashoffset="0" />
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#f59e0b" stroke-width="18"
+                                        stroke-dasharray="75 239" stroke-dashoffset="-188" />
+                                    <circle cx="60" cy="60" r="50" fill="none" stroke="#ef4444" stroke-width="18"
+                                        stroke-dasharray="51 263" stroke-dashoffset="-263" /><text x="60" y="55"
+                                        text-anchor="middle" fill="#fff" font-size="14"
+                                        font-weight="bold">98.4K</text><text x="60" y="72" text-anchor="middle"
+                                        fill="#94a3b8" font-size="9">Total</text>
+                                </svg></div>
+                            <div class="donut-legend">
+                                <div class="donut-litem"><span style="background:#22c55e"></span>
+                                    <div><strong>60%</strong> Resolved</div>
+                                </div>
+                                <div class="donut-litem"><span style="background:#f59e0b"></span>
+                                    <div><strong>24%</strong> In Progress</div>
+                                </div>
+                                <div class="donut-litem"><span style="background:#ef4444"></span>
+                                    <div><strong>16%</strong> Escalated</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Alerts -->
+                <div class="dash-card alerts-card">
+                    <div class="dash-card-header">
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg> Live Intelligence Alerts</h3>
+                        <div class="live-badge"><span style="color:#ef4444;animation:pulse 2s infinite">&#9679;</span>
+                            LIVE</div>
+                    </div>
+                    <div class="alerts-list" id="alertsList">
+                        <div class="alert-item alert-red">
+                            <div class="alert-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M19 16.9A5 5 0 0018 7h-1.26a8 8 0 10-11.62 9" />
+                                    <polyline points="13 11 9 17 15 17 11 23" />
+                                </svg></div>
+                            <div class="alert-body"><strong>Cyclone Warning — Odisha Coast</strong>
+                                <p>Wind speed 120 km/h expected landfall in 36 hours. Evacuation advisory issued.</p>
+                            </div>
+                            <div class="alert-meta"><span class="alert-badge high">HIGH</span><span
+                                    class="alert-time">2m ago</span></div>
+                        </div>
+                        <div class="alert-item alert-orange">
+                            <div class="alert-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                    <polyline points="17 6 23 6 23 12" />
+                                </svg></div>
+                            <div class="alert-body"><strong>Economic Anomaly — Punjab Wheat Prices</strong>
+                                <p>15% price spike detected. Cross-referencing with MSP policy impact.</p>
+                            </div>
+                            <div class="alert-meta"><span class="alert-badge medium">MED</span><span
+                                    class="alert-time">8m ago</span></div>
+                        </div>
+                        <div class="alert-item alert-blue">
+                            <div class="alert-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                </svg></div>
+                            <div class="alert-body"><strong>Voter Engagement Milestone — Bihar</strong>
+                                <p>2.4M citizen notifications sent. 78% open rate — highest in 3 months.</p>
+                            </div>
+                            <div class="alert-meta"><span class="alert-badge low">LOW</span><span class="alert-time">15m
+                                    ago</span></div>
+                        </div>
+                        <div class="alert-item alert-green">
+                            <div class="alert-icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg></div>
+                            <div class="alert-body"><strong>Grievance Batch Resolved — Maharashtra</strong>
+                                <p>1,204 water supply grievances auto-resolved via AI. Escalation rate dropped 32%.</p>
+                            </div>
+                            <div class="alert-meta"><span class="alert-badge info">INFO</span><span
+                                    class="alert-time">22m ago</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 2: KNOWLEDGE GRAPH -->
+        <section class="page-view" id="page-graph">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> GraphRAG Knowledge Graph</div>
+                    <h1>Sovereign GraphRAG Intelligence Engine</h1>
+                </div>
+                <div style="display:flex;gap:0.5rem;align-items:center">
+                    <div style="display:flex;gap:0.3rem;font-size:0.6rem;align-items:center">
+                        <span
+                            style="width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite"></span>
+                        <span style="color:#22c55e">Neo4j Connected</span>
+                    </div>
+                    <div style="display:flex;gap:0.3rem;font-size:0.6rem;align-items:center">
+                        <span
+                            style="width:6px;height:6px;border-radius:50%;background:#3b82f6;animation:pulse 2s infinite"></span>
+                        <span style="color:#3b82f6">Vector Index Active</span>
+                    </div>
+                    <button class="btn-primary" style="font-size:0.72rem;padding:0.4rem 0.8rem"
+                        onclick="switchPage('copilot')">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12"
+                            height="12">
+                            <circle cx="12" cy="12" r="3" />
+                            <path
+                                d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33" />
+                        </svg>
+                        Open in AI Co-Pilot
+                    </button>
+                </div>
+            </div>
+
+            <!-- GraphRAG Query Bar -->
+            <div class="grag-query-bar">
+                <div class="grag-query-input-wrap">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                        <circle cx="11" cy="11" r="8" />
+                        <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input type="text" id="gragQueryInput"
+                        placeholder="Ask in natural language... e.g. 'How does UP wheat production affect national GDP?'" />
+                    <div class="grag-query-modes">
+                        <button class="grag-mode-btn active" onclick="setGraphSearchMode(this,'hybrid')"
+                            title="Hybrid: Graph + Vector">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12"
+                                height="12">
+                                <circle cx="12" cy="5" r="3" />
+                                <circle cx="5" cy="19" r="3" />
+                                <circle cx="19" cy="19" r="3" />
+                                <line x1="12" y1="8" x2="5" y2="16" />
+                                <line x1="12" y1="8" x2="19" y2="16" />
+                            </svg>
+                            Hybrid
+                        </button>
+                        <button class="grag-mode-btn" onclick="setGraphSearchMode(this,'cypher')"
+                            title="Direct Cypher Query">⟐ Cypher</button>
+                        <button class="grag-mode-btn" onclick="setGraphSearchMode(this,'vector')"
+                            title="Pure Vector Similarity">◎ Vector</button>
+                        <button class="grag-mode-btn" onclick="setGraphSearchMode(this,'path')"
+                            title="Multi-hop Path Finder">⤳ Path</button>
+                    </div>
+                    <button class="grag-search-btn" onclick="executeGraphRAGQuery()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                            height="16">
+                            <line x1="22" y1="2" x2="11" y2="13" />
+                            <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="grag-quick-queries">
+                    <button onclick="setGragQuery('Show all policy nodes connected to PM-KISAN scheme')">PM-KISAN
+                        graph</button>
+                    <button
+                        onclick="setGragQuery('Find shortest path between Bihar drought and central water policy')">Multi-hop:
+                        Drought→Policy</button>
+                    <button onclick="setGragQuery('Which districts are most impacted by ASEAN trade agreement?')">Trade
+                        impact analysis</button>
+                    <button onclick="setGragQuery('Show climate risk propagation from Bay of Bengal cyclone')">Climate
+                        risk path</button>
+                </div>
+            </div>
+
+            <div class="graph-layout">
+                <!-- Left Panel: Filters + Graph Stats + Cypher -->
+                <div class="graph-sidebar">
+                    <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                            height="14">
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                        </svg> Graph Filters</h4>
+                    <div class="filter-group"><label>Domain Ontology</label>
+                        <div class="filter-chips">
+                            <button class="filter-chip active" onclick="filterGraphDomain(this,'all')">All</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'policy')">Policy</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'economic')">Economic</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'geo')">Geographic</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'civic')">Civic</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'env')">Climate</button>
+                            <button class="filter-chip" onclick="filterGraphDomain(this,'scheme')">Schemes</button>
+                        </div>
+                    </div>
+                    <div class="filter-group"><label>Region</label><select class="filter-select"
+                            onchange="filterGraphRegion(this.value)">
+                            <option>All India</option>
+                            <option>North</option>
+                            <option>South</option>
+                            <option>East</option>
+                            <option>West</option>
+                            <option>Northeast</option>
+                        </select></div>
+                    <div class="filter-group"><label>Depth (Hops)</label>
+                        <div style="display:flex;align-items:center;gap:0.5rem">
+                            <input type="range" min="1" max="6" value="3" id="graphDepthSlider"
+                                style="flex:1;accent-color:#FF9933"
+                                oninput="document.getElementById('depthVal').textContent=this.value">
+                            <span id="depthVal" style="font-size:0.72rem;font-weight:700;color:var(--saffron)">3</span>
+                        </div>
+                    </div>
+
+                    <!-- Live Pipeline Status -->
+                    <div class="grag-pipeline-status">
+                        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14"
+                                height="14">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                            </svg> ETL Pipeline</h4>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#22c55e"></span><span>data.gov.in</span><span
+                                style="color:#22c55e;font-size:0.6rem">LIVE</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#22c55e"></span><span>IMD Mausam</span><span
+                                style="color:#22c55e;font-size:0.6rem">LIVE</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#22c55e"></span><span>Bhuvan ISRO</span><span
+                                style="color:#22c55e;font-size:0.6rem">LIVE</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#3b82f6"></span><span>NDAP NITI Aayog</span><span
+                                style="color:#3b82f6;font-size:0.6rem">SYNC</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#22c55e"></span><span>MOSPI Stats</span><span
+                                style="color:#22c55e;font-size:0.6rem">LIVE</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#22c55e"></span><span>PIB News</span><span
+                                style="color:#22c55e;font-size:0.6rem">LIVE</span></div>
+                        <div class="grag-etl-item"><span class="grag-etl-dot"
+                                style="background:#f59e0b"></span><span>ECI Election</span><span
+                                style="color:#f59e0b;font-size:0.6rem">BATCH</span></div>
+                    </div>
+
+                    <!-- Graph Stats -->
+                    <div class="graph-stats-panel">
+                        <h4>Neo4j Cluster Stats</h4>
+                        <div class="gstat"><span>Total Nodes</span><strong style="color:#FF9933">108.4M</strong></div>
+                        <div class="gstat"><span>Relationships</span><strong style="color:#138808">457.8M</strong></div>
+                        <div class="gstat"><span>Entity Types</span><strong>312</strong></div>
+                        <div class="gstat"><span>Vector Indexes</span><strong style="color:#3b82f6">48</strong></div>
+                        <div class="gstat"><span>Embedding Dim</span><strong>1536</strong></div>
+                        <div class="gstat"><span>Avg Query</span><strong style="color:#22c55e">&lt;120ms</strong></div>
+                        <div class="gstat"><span>Cache Hit Rate</span><strong style="color:#a855f7">94.2%</strong></div>
+                        <div class="gstat"><span>Languages</span><strong>22+</strong></div>
+                    </div>
+
+                    <div class="node-legend">
+                        <h4>Node Ontology</h4>
+                        <div class="nleg"><span class="nleg-dot" style="background:#FF9933"></span>Policy / Scheme</div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#138808"></span>Economic Entity</div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#3b82f6"></span>Geographic Region
+                        </div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#a855f7"></span>Civic / Governance
+                        </div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#f59e0b"></span>Climate / Env</div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#06b6d4"></span>Infrastructure</div>
+                        <div class="nleg"><span class="nleg-dot" style="background:#ec4899"></span>Health / Welfare
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graph Canvas -->
+                <div class="graph-canvas-wrap">
+                    <canvas id="graphCanvas" width="800" height="500"></canvas>
+                    <div class="graph-controls">
+                        <button onclick="zoomIn()" title="Zoom In">+</button>
+                        <button onclick="zoomOut()" title="Zoom Out">&minus;</button>
+                        <button onclick="resetGraph()" title="Reset">&#x27F3;</button>
+                    </div>
+                    <!-- Generated Cypher Display -->
+                    <div class="grag-cypher-display" id="gragCypherDisplay" style="display:none">
+                        <div class="grag-cypher-header">
+                            <span>🔗 Generated Cypher Query</span>
+                            <button onclick="document.getElementById('gragCypherDisplay').style.display='none'"
+                                style="background:none;border:none;color:var(--text-muted);cursor:pointer;font-size:0.8rem">✕</button>
+                        </div>
+                        <pre id="gragCypherCode"></pre>
+                        <div class="grag-cypher-meta" id="gragCypherMeta"></div>
+                    </div>
+                    <!-- Path Explainer -->
+                    <div class="grag-path-strip" id="gragPathStrip" style="display:none"></div>
+                </div>
+
+                <!-- Right Detail Panel -->
+                <div class="graph-detail-panel" id="graphDetailPanel">
+                    <h4>Selected Entity</h4>
+                    <div class="detail-node-header">
+                        <div class="detail-node-icon" style="background:rgba(255,153,51,0.2)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#FF9933" stroke-width="2" width="18" height="18">
+                                <circle cx="12" cy="5" r="3" />
+                                <circle cx="5" cy="19" r="3" />
+                                <circle cx="19" cy="19" r="3" />
+                                <line x1="12" y1="8" x2="5" y2="16" />
+                                <line x1="12" y1="8" x2="19" y2="16" />
+                            </svg></div>
+                        <div><strong id="detailNodeName">India Trade Policy</strong><small id="detailNodeType">Type:
+                                Policy Entity</small></div>
+                    </div>
+                    <div class="detail-relations">
+                        <h5 id="detailRelCount">Connected Entities (8)</h5>
+                        <div id="detailRelList">
+                            <div class="rel-item"><span class="rel-type">&rarr; Affects</span><span>Indonesia
+                                    Economy</span></div>
+                            <div class="rel-item"><span class="rel-type">&rarr; Involves</span><span>MOCI, New
+                                    Delhi</span></div>
+                            <div class="rel-item"><span class="rel-type">&rarr; Impact</span><span>Tamil Nadu
+                                    Ports</span></div>
+                            <div class="rel-item"><span class="rel-type">&larr; Derived</span><span>ASEAN Summit
+                                    2025</span></div>
+                            <div class="rel-item"><span class="rel-type">&harr; Linked</span><span>UPI
+                                    Cross-Border</span></div>
+                        </div>
+                    </div>
+                    <!-- Provenance & Vector Info -->
+                    <div class="detail-meta">
+                        <h5 style="font-size:0.7rem;color:var(--text-muted);margin-bottom:0.3rem">📐 Vector Embedding
+                        </h5>
+                        <div class="dmeta"><span>Similarity</span><strong id="detailSimilarity">0.947</strong></div>
+                        <div class="dmeta"><span>Embedding Model</span><strong>text-embedding-3</strong></div>
+                        <div class="dmeta"><span>Dimension</span><strong>1536</strong></div>
+                        <h5 style="font-size:0.7rem;color:var(--text-muted);margin:0.5rem 0 0.3rem">📋 Provenance</h5>
+                        <div class="dmeta"><span>Source</span><strong id="detailSource">MEA + GDELT</strong></div>
+                        <div class="dmeta"><span>Last Updated</span><strong id="detailUpdated">2 hours ago</strong>
+                        </div>
+                        <div class="dmeta"><span>ETL Pipeline</span><strong style="color:#22c55e">Verified ✓</strong>
+                        </div>
+                        <div class="dmeta"><span>Cache Status</span><strong style="color:#a855f7">Redis: HIT</strong>
+                        </div>
+                    </div>
+                    <button class="btn-explore" onclick="exploreSubgraph()"><svg viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" width="14" height="14">
+                            <circle cx="11" cy="11" r="8" />
+                            <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                        </svg> Explore Full Subgraph</button>
+                    <button class="btn-explore"
+                        style="margin-top:0.4rem;border-color:rgba(168,85,247,0.3);color:#a855f7"
+                        onclick="traceImpact()"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" width="14" height="14">
+                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12" />
+                        </svg> Trace Policy Impact</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 3: AI CO-PILOT -->
+        <section class="page-view" id="page-copilot">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> AI Co-Pilot</div>
+                    <h1>Sovereign Intelligence Assistant</h1>
+                </div>
+            </div>
+            <div class="copilot-layout">
+                <div class="persona-panel">
+                    <h4>Select Role</h4>
+                    <div class="persona-item active" onclick="selectPersona(this,'collector')">
+                        <div class="persona-avatar-icon" style="background:rgba(255,153,51,0.15);color:#FF9933"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                            </svg></div>
+                        <div><strong>District Collector</strong><small>Admin & Policy</small></div>
+                    </div>
+                    <div class="persona-item" onclick="selectPersona(this,'voter')">
+                        <div class="persona-avatar-icon" style="background:rgba(59,130,246,0.15);color:#3B82F6"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg></div>
+                        <div><strong>Citizen / Voter</strong><small>Civic Services</small></div>
+                    </div>
+                    <div class="persona-item" onclick="selectPersona(this,'advisor')">
+                        <div class="persona-avatar-icon" style="background:rgba(139,92,246,0.15);color:#8B5CF6"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                            </svg></div>
+                        <div><strong>Policy Advisor</strong><small>Strategic Reports</small></div>
+                    </div>
+                    <div class="persona-item" onclick="selectPersona(this,'admin')">
+                        <div class="persona-avatar-icon" style="background:rgba(34,197,94,0.15);color:#22C55E"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <circle cx="12" cy="12" r="3" />
+                                <path
+                                    d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
+                            </svg></div>
+                        <div><strong>System Admin</strong><small>KPI Monitoring</small></div>
+                    </div>
+                    <div class="lang-selector">
+                        <h4>Language</h4><select id="langSelect">
+                            <option value="en">English</option>
+                            <option value="hi">Hindi</option>
+                            <option value="mr">Marathi</option>
+                            <option value="ta">Tamil</option>
+                            <option value="te">Telugu</option>
+                            <option value="bn">Bengali</option>
+                        </select>
+                    </div>
+                    <div class="suggested-queries">
+                        <h4>Suggested Queries</h4><button class="suggest-btn" onclick="setQuery(this)">Analyze economic
+                            impact of trade on UP agriculture</button><button class="suggest-btn"
+                            onclick="setQuery(this)">Summarize flood risk in coastal Maharashtra</button><button
+                            class="suggest-btn" onclick="setQuery(this)">Top 5 grievances in Bihar this
+                            week?</button><button class="suggest-btn" onclick="setQuery(this)">Compare voter engagement
+                            across 5 states</button>
+                    </div>
+                </div>
+                <div class="chat-panel">
+                    <div class="chat-header">
+                        <div class="chat-bot-avatar">N</div>
+                        <div class="chat-info"><strong>Netra — ViksitNetra AI Co-Pilot</strong><small>&#9679; Online |
+                                Sovereign LLM | Graph-Aware</small></div>
+                        <div class="chat-badges"><span class="badge-secure"><svg width="10" height="10"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                                </svg> Secure</span><span class="badge-sovereign"><svg width="10" height="10"
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                </svg> Sovereign</span></div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai">
+                            <div class="msg-avatar">N</div>
+                            <div class="msg-bubble">
+                                <p>Namaste! I am <strong>Netra</strong>, your ViksitNetra AI Co-Pilot. I have
+                                    access to India's sovereign knowledge graph with <strong>100M+ nodes</strong>
+                                    spanning geopolitics, economics, defense, climate, and civic domains.</p>
+                                <p>How can I assist you today? You may ask in any of India's 22+ official languages.</p>
+                                <div class="msg-graph-preview">
+                                    <div class="graph-node n1">Economy</div>
+                                    <div class="graph-edge"></div>
+                                    <div class="graph-node n2">UP</div>
+                                    <div class="graph-edge"></div>
+                                    <div class="graph-node n3">Agriculture</div>
+                                </div><button class="btn-graph-path" onclick="switchPage('graph')"><svg
+                                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                                        width="14" height="14">
+                                        <circle cx="12" cy="5" r="3" />
+                                        <circle cx="5" cy="19" r="3" />
+                                        <circle cx="19" cy="19" r="3" />
+                                        <line x1="12" y1="8" x2="5" y2="16" />
+                                        <line x1="12" y1="8" x2="19" y2="16" />
+                                    </svg> Show Graph Path</button>
+                            </div>
+                            <div class="msg-time">Just now</div>
+                        </div>
+                    </div>
+                    <div class="chat-input-area">
+                        <div class="input-actions"><button class="mic-btn" id="micBtn" title="Voice Input"><svg
+                                    width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <path d="M12 1a3 3 0 00-3 3v8a3 3 0 006 0V4a3 3 0 00-3-3z" />
+                                    <path d="M19 10v2a7 7 0 01-14 0v-2" />
+                                    <line x1="12" y1="19" x2="12" y2="23" />
+                                    <line x1="8" y1="23" x2="16" y2="23" />
+                                </svg></button><textarea id="chatInput"
+                                placeholder="Ask the knowledge graph... (Ctrl+Enter to send)"
+                                rows="1"></textarea><button class="send-btn" id="sendBtn" onclick="sendMessage()"><svg
+                                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <line x1="22" y1="2" x2="11" y2="13" />
+                                    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                                </svg></button></div>
+                        <div class="input-meta"><span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2" width="10" height="10">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" />
+                                    <path d="M7 11V7a5 5 0 0110 0v4" />
+                                </svg> End-to-End Encrypted</span><span>Powered by BharatGen LLM</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 4: CITIZEN SERVICES -->
+        <section class="page-view" id="page-citizen">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Citizen Services</div>
+                    <h1>Empowering Every Indian Citizen</h1>
+                </div>
+            </div>
+            <div class="citizen-grid">
+                <div class="citizen-card">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#FF9933,#e67300)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9" />
+                                <path d="M13.73 21a2 2 0 01-3.46 0" />
+                            </svg></div>
+                        <div>
+                            <h4>Hyper-Local Notifications</h4>
+                            <p>Geo-fenced civic alerts at booth level</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body">
+                        <div class="notif-list">
+                            <div class="notif-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FF9933"
+                                    stroke-width="2">
+                                    <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                                </svg>
+                                <div>
+                                    <p>Road repair NH-48, Andheri East starting tomorrow 4 AM.</p><span
+                                        class="notif-time">2 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notif-item"><svg viewBox="0 0 24 24" fill="none" stroke="#22C55E"
+                                    stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                    <polyline points="22 4 12 14.01 9 11.01" />
+                                </svg>
+                                <div>
+                                    <p>Free vaccination drive at Municipal Dispensary No. 12, 9 AM–5 PM.</p><span
+                                        class="notif-time">5 hours ago</span>
+                                </div>
+                            </div>
+                            <div class="notif-item"><svg viewBox="0 0 24 24" fill="none" stroke="#3B82F6"
+                                    stroke-width="2">
+                                    <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                    <circle cx="9" cy="7" r="4" />
+                                </svg>
+                                <div>
+                                    <p>New voter registration deadline extended to March 15. Visit booth 247.</p><span
+                                        class="notif-time">1 day ago</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="citizen-card">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <circle cx="12" cy="7" r="4" />
+                                <path d="M5 21v-2a7 7 0 0114 0v2" />
+                            </svg></div>
+                        <div>
+                            <h4>AI Avatar Assistant</h4>
+                            <p>Multilingual voice & text support in 22+ languages</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body">
+                        <div class="notif-list">
+                            <div class="notif-item"><svg viewBox="0 0 24 24" fill="none" stroke="#8B5CF6"
+                                    stroke-width="2">
+                                    <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+                                </svg>
+                                <div>
+                                    <p><strong>Grievance GRV-4521:</strong> Water Supply Issue — Resolved in 2 days
+                                        ahead of SLA.</p><span class="notif-time">Action by Mumbai Water Board</span>
+                                </div>
+                            </div>
+                            <div class="notif-item"><svg viewBox="0 0 24 24" fill="none" stroke="#FF9933"
+                                    stroke-width="2">
+                                    <circle cx="12" cy="12" r="10" />
+                                    <path d="M12 8v4l3 3" />
+                                </svg>
+                                <div>
+                                    <p>Your feedback improves the knowledge graph. Civic contribution score:
+                                        <strong>87/100</strong>
+                                    </p><span class="notif-time">Updated today</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="citizen-card">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#138808,#00a86b)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg></div>
+                        <div>
+                            <h4>Aadhaar-Linked Profile</h4>
+                            <p>Secure identity verification for all services</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body">
+                        <p style="color:var(--text-secondary);font-size:0.78rem;">Set your language preference, link
+                            Aadhaar for secure access to all governance services, track your grievances and participate
+                            in civic feedback loops.</p>
+                    </div>
+                </div>
+                <div class="citizen-card">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                                <path
+                                    d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z" />
+                            </svg></div>
+                        <div>
+                            <h4>Bhashini Integration</h4>
+                            <p>22+ Indian languages supported</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body">
+                        <p style="color:var(--text-secondary);font-size:0.78rem;">All services are available in your
+                            preferred language. Voice and text input supported via Bhashini NLP API with 99.9% uptime.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 5: GRIEVANCE TRACKER -->
+        <section class="page-view" id="page-grievance">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Grievance Tracker</div>
+                    <h1>Public Grievance Command Center</h1>
+                </div><button class="btn-primary" onclick="openGrievanceModal()"><svg width="14" height="14"
+                        viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="12" y1="5" x2="12" y2="19" />
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                    </svg> File New Grievance</button>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:1.5rem">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#22C55E" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#22C55E">58,920</div>
+                    <div class="kpi-label">Resolved</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(245,158,11,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#F59E0B" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#F59E0B">23,624</div>
+                    <div class="kpi-label">In Progress</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(239,68,68,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#EF4444" stroke-width="2">
+                                <path
+                                    d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                <line x1="12" y1="9" x2="12" y2="13" />
+                                <line x1="12" y1="17" x2="12.01" y2="17" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#EF4444">15,888</div>
+                    <div class="kpi-label">Escalated</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#3B82F6">1,247</div>
+                    <div class="kpi-label">New Today</div>
+                </div>
+            </div>
+            <div class="grievance-table-wrap">
+                <table class="grievance-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Category</th>
+                            <th>Location</th>
+                            <th>Status</th>
+                            <th>Filed</th>
+                            <th>SLA</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>GRV-4521</td>
+                            <td>Water Supply</td>
+                            <td>Ward 14, Mumbai</td>
+                            <td><span class="status-badge resolved"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg> Resolved</span></td>
+                            <td>Mar 1</td>
+                            <td>2 days early</td>
+                        </tr>
+                        <tr>
+                            <td>GRV-4522</td>
+                            <td>Road Pothole</td>
+                            <td>NH-48, Andheri</td>
+                            <td><span class="status-badge in-progress"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4l3 3" />
+                                    </svg> In Progress</span></td>
+                            <td>Mar 2</td>
+                            <td>1 day left</td>
+                        </tr>
+                        <tr>
+                            <td>GRV-4523</td>
+                            <td>Power Outage</td>
+                            <td>Block 7, Patna</td>
+                            <td><span class="status-badge escalated"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <path
+                                            d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
+                                    </svg> Escalated</span></td>
+                            <td>Feb 28</td>
+                            <td>Overdue</td>
+                        </tr>
+                        <tr>
+                            <td>GRV-4524</td>
+                            <td>Health Services</td>
+                            <td>CHC, Varanasi</td>
+                            <td><span class="status-badge in-progress"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <path d="M12 8v4l3 3" />
+                                    </svg> In Progress</span></td>
+                            <td>Mar 3</td>
+                            <td>3 days left</td>
+                        </tr>
+                        <tr>
+                            <td>GRV-4525</td>
+                            <td>Document Verify</td>
+                            <td>Taluk Office, Jaipur</td>
+                            <td><span class="status-badge new"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <line x1="12" y1="5" x2="12" y2="19" />
+                                        <line x1="5" y1="12" x2="19" y2="12" />
+                                    </svg> New</span></td>
+                            <td>Mar 4</td>
+                            <td>5 days</td>
+                        </tr>
+                        <tr>
+                            <td>GRV-4526</td>
+                            <td>Water Supply</td>
+                            <td>Ward 8, Pune</td>
+                            <td><span class="status-badge resolved"><svg viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" width="10" height="10">
+                                        <polyline points="20 6 9 17 4 12" />
+                                    </svg> Resolved</span></td>
+                            <td>Feb 27</td>
+                            <td>On time</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PAGE 6: E-VOTING -->
+        <section class="page-view" id="page-evoting">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> E-Voting</div>
+                    <h1>Secure Blockchain E-Voting</h1>
+                </div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:1.5rem">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(255,153,51,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#FF9933" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#FF9933">1,204</div>
+                    <div class="kpi-label">Blockchain Records</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#22C55E" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#22C55E">100%</div>
+                    <div class="kpi-label">Verifiability</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#3B82F6">ZKP</div>
+                    <div class="kpi-label">Privacy Protocol</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(139,92,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#8B5CF6" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                                <line x1="12" y1="17" x2="12" y2="21" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#8B5CF6">Q3'26</div>
+                    <div class="kpi-label">Launch Target</div>
+                </div>
+            </div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <rect x="3" y="11" width="18" height="11" rx="2" />
+                                <path d="M7 11V7a5 5 0 0110 0v4" />
+                                <path d="M9 16l2 2 4-4" />
+                            </svg> Demo: Cast Your Vote</h3>
+                    </div>
+                    <div style="padding:0.5rem 0">
+                        <p style="font-size:0.78rem;color:var(--text-secondary);margin-bottom:1rem">This is a simulation
+                            of the blockchain-based e-voting system. Select a candidate and submit your vote securely.
+                        </p>
+                        <div id="votingOptions" style="display:flex;flex-direction:column;gap:0.5rem">
+                            <label class="vote-option"
+                                style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1px solid var(--border-color);border-radius:8px;cursor:pointer;transition:all 0.2s"><input
+                                    type="radio" name="vote" value="Candidate A" style="accent-color:#FF9933">
+                                <div><strong style="font-size:0.82rem">Candidate A</strong><br><span
+                                        style="font-size:0.68rem;color:var(--text-muted)">Progressive Development
+                                        Party</span></div>
+                            </label>
+                            <label class="vote-option"
+                                style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1px solid var(--border-color);border-radius:8px;cursor:pointer;transition:all 0.2s"><input
+                                    type="radio" name="vote" value="Candidate B" style="accent-color:#138808">
+                                <div><strong style="font-size:0.82rem">Candidate B</strong><br><span
+                                        style="font-size:0.68rem;color:var(--text-muted)">National Reform
+                                        Alliance</span></div>
+                            </label>
+                            <label class="vote-option"
+                                style="display:flex;align-items:center;gap:0.75rem;padding:0.75rem;border:1px solid var(--border-color);border-radius:8px;cursor:pointer;transition:all 0.2s"><input
+                                    type="radio" name="vote" value="NOTA" style="accent-color:#3B82F6">
+                                <div><strong style="font-size:0.82rem">NOTA</strong><br><span
+                                        style="font-size:0.68rem;color:var(--text-muted)">None of the Above</span></div>
+                            </label>
+                        </div>
+                        <button class="btn-primary" style="width:100%;margin-top:1rem;justify-content:center"
+                            onclick="castDemoVote()">🗳️ Cast Vote (Demo)</button>
+                        <div id="voteResult" style="margin-top:1rem"></div>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                height="16">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg> Blockchain Audit Trail</h3>
+                    </div>
+                    <div id="blockchainLog" style="font-size:0.72rem;max-height:240px;overflow-y:auto">
+                        <div
+                            style="padding:0.5rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary)">
+                            🔗 Block #124800 — Validated | Hash: 0x3f8a...c2d1 | 2 min ago</div>
+                        <div
+                            style="padding:0.5rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary)">
+                            🔗 Block #124799 — Validated | Hash: 0xa1b2...9e4f | 5 min ago</div>
+                        <div
+                            style="padding:0.5rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary)">
+                            🔗 Block #124798 — Validated | Hash: 0x7c3d...b5a8 | 8 min ago</div>
+                        <div
+                            style="padding:0.5rem;border-bottom:1px solid var(--border-color);color:var(--text-secondary)">
+                            🔗 Block #124797 — Validated | Hash: 0xd4e5...f1c3 | 12 min ago</div>
+                    </div>
+                    <p style="font-size:0.68rem;color:var(--green-success);margin-top:0.75rem">✅ All blocks verified —
+                        Zero anomalies detected | Hyperledger Fabric</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 7: REPORTS -->
+        <section class="page-view" id="page-reports">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Reports</div>
+                    <h1>Governance Reports</h1>
+                </div>
+            </div>
+            <div class="citizen-grid">
+                <div class="citizen-card" style="cursor:pointer" onclick="downloadReport('governance')">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#FF9933,#e67300)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                            </svg></div>
+                        <div>
+                            <h4>📊 Governance Dashboard Report</h4>
+                            <p>Full KPI metrics, sector activity, and national overview</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body"><button class="btn-primary" style="width:100%;justify-content:center"
+                            onclick="event.stopPropagation();downloadReport('governance')"><svg width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Download Report</button></div>
+                </div>
+                <div class="citizen-card" style="cursor:pointer" onclick="downloadReport('grievance')">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#22C55E,#16a34a)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg></div>
+                        <div>
+                            <h4>📋 Grievance Resolution Report</h4>
+                            <p>Category-wise breakdown, resolution rates, SLA compliance</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body"><button class="btn-primary"
+                            style="width:100%;justify-content:center;background:linear-gradient(135deg,#22C55E,#16a34a)"
+                            onclick="event.stopPropagation();downloadReport('grievance')"><svg width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Download Report</button></div>
+                </div>
+                <div class="citizen-card" style="cursor:pointer" onclick="downloadReport('economic')">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#3B82F6,#1D4ED8)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <line x1="18" y1="20" x2="18" y2="10" />
+                                <line x1="12" y1="20" x2="12" y2="4" />
+                                <line x1="6" y1="20" x2="6" y2="14" />
+                            </svg></div>
+                        <div>
+                            <h4>💰 Economic Intelligence Report</h4>
+                            <p>GDP, FDI, trade data, sector performance analytics</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body"><button class="btn-primary"
+                            style="width:100%;justify-content:center;background:linear-gradient(135deg,#3B82F6,#1D4ED8)"
+                            onclick="event.stopPropagation();downloadReport('economic')"><svg width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Download Report</button></div>
+                </div>
+                <div class="citizen-card" style="cursor:pointer" onclick="downloadReport('state-wise')">
+                    <div class="citizen-card-head">
+                        <div class="cc-icon" style="background:linear-gradient(135deg,#8B5CF6,#6D28D9)"><svg
+                                viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg></div>
+                        <div>
+                            <h4>🗺️ State-wise Analytics Report</h4>
+                            <p>Per-state performance comparison and district analysis</p>
+                        </div>
+                    </div>
+                    <div class="citizen-card-body"><button class="btn-primary"
+                            style="width:100%;justify-content:center;background:linear-gradient(135deg,#8B5CF6,#6D28D9)"
+                            onclick="event.stopPropagation();downloadReport('state-wise')"><svg width="14" height="14"
+                                viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg> Download Report</button></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 8: POLICY IMPACT SIMULATOR -->
+        <section class="page-view" id="page-policy-sim">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Policy Simulator</div>
+                    <h1>Policy Impact Simulator (What-If Engine)</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#a855f7,#7c3aed);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                    </svg>
+                    Real-Time Predictive AI
+                </div>
+            </div>
+            <div class="sim-container">
+                <div class="sim-input-panel">
+                    <div class="dash-card">
+                        <div class="dash-card-header">
+                            <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16"
+                                    height="16">
+                                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+                                </svg> What-If Query Engine</h3>
+                        </div>
+                        <div class="sim-query-box">
+                            <textarea id="simQuery" class="sim-textarea"
+                                placeholder='Try: "What if we increase farm subsidy by 15% in UP?"'
+                                rows="3">What if we increase farm subsidy by 15% in UP?</textarea>
+                            <div class="sim-presets">
+                                <button class="sim-preset-btn"
+                                    onclick="setSimQuery('What if we increase farm subsidy by 15% in UP?')">🌾 Farm
+                                    Subsidy +15% UP</button>
+                                <button class="sim-preset-btn"
+                                    onclick="setSimQuery('What if industrial tax is reduced by 10% in Maharashtra?')">🏭
+                                    Tax -10% Maharashtra</button>
+                                <button class="sim-preset-btn"
+                                    onclick="setSimQuery('What if we build 500 new schools in Bihar?')">🏫 500 Schools
+                                    Bihar</button>
+                                <button class="sim-preset-btn"
+                                    onclick="setSimQuery('What if EV subsidy increases by 25% nationwide?')">⚡ EV
+                                    Subsidy +25%</button>
+                            </div>
+                            <button class="btn-primary" style="width:100%;justify-content:center;margin-top:0.75rem"
+                                onclick="runSimulation()">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <polygon points="5 3 19 12 5 21 5 3" />
+                                </svg>
+                                Run Simulation
+                            </button>
+                        </div>
+                    </div>
+                    <div class="dash-card" id="simRiskCard" style="display:none">
+                        <div class="dash-card-header">
+                            <h3>⚠️ Risk Assessment</h3>
+                        </div>
+                        <div id="simRiskContent"></div>
+                    </div>
+                </div>
+                <div class="sim-results-panel">
+                    <div id="simResultsContainer">
+                        <div class="sim-empty-state">
+                            <div class="sim-empty-icon">🔮</div>
+                            <h3>Run a Policy Simulation</h3>
+                            <p>Type your "What If" scenario or choose a preset, then click Run Simulation to see
+                                predicted impacts across economic, climate, and social dimensions.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 9: DISTRICT SCORECARD -->
+        <section class="page-view" id="page-scorecard">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> District Scorecard</div>
+                    <h1>Viksit Bharat 2047 District Scorecard</h1>
+                </div>
+                <div style="display:flex;gap:0.5rem;align-items:center">
+                    <select class="filter-select" id="scorecardState" onchange="updateScorecard()">
+                        <option value="all">All India</option>
+                        <option value="UP">Uttar Pradesh</option>
+                        <option value="MH">Maharashtra</option>
+                        <option value="KA">Karnataka</option>
+                        <option value="TN">Tamil Nadu</option>
+                        <option value="BR">Bihar</option>
+                        <option value="RJ">Rajasthan</option>
+                        <option value="GJ">Gujarat</option>
+                    </select>
+                </div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:1.5rem">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#22C55E" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#22C55E">73.4</div>
+                    <div class="kpi-label">National Avg Score</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(255,153,51,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#FF9933" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#FF9933">766</div>
+                    <div class="kpi-label">Districts Tracked</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#3B82F6">+4.2%</div>
+                    <div class="kpi-label">Quarterly Growth</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(139,92,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#8B5CF6" stroke-width="2">
+                                <rect x="2" y="3" width="20" height="14" rx="2" />
+                                <line x1="8" y1="21" x2="16" y2="21" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#8B5CF6">12</div>
+                    <div class="kpi-label">KPIs Monitored</div>
+                </div>
+            </div>
+            <div class="scorecard-grid" id="scorecardGrid"></div>
+        </section>
+
+        <!-- PAGE 10: CITIZEN DATA HUB -->
+        <section class="page-view" id="page-citizen-data">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Citizen Data Hub</div>
+                    <h1>Verified Citizen Data Contribution Layer</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#3b82f6,#1d4ed8);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                    Aadhaar Verified
+                </div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:1.5rem">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                <circle cx="9" cy="7" r="4" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#3B82F6">2.4M</div>
+                    <div class="kpi-label">Data Soldiers</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#22C55E" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#22C55E">847K</div>
+                    <div class="kpi-label">Reports Verified</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(255,153,51,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#FF9933" stroke-width="2">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#FF9933">98.7%</div>
+                    <div class="kpi-label">AI Accuracy</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(139,92,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#8B5CF6" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 8v4l3 3" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#8B5CF6">&lt;2min</div>
+                    <div class="kpi-label">Avg Validation Time</div>
+                </div>
+            </div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>📤 Upload Civic Issue</h3>
+                    </div>
+                    <div class="citizen-upload-area">
+                        <div class="upload-dropzone" id="uploadDropzone"
+                            onclick="document.getElementById('fileUpload').click()">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#3b82f6"
+                                stroke-width="1.5" style="opacity:0.6">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                            <p style="margin-top:0.5rem;font-size:0.82rem;color:var(--text-secondary)">Click or drag
+                                photo/video of the issue</p>
+                            <p style="font-size:0.68rem;color:var(--text-muted)">Supports: JPG, PNG, MP4 • Max 10MB</p>
+                            <input type="file" id="fileUpload" accept="image/*,video/*" style="display:none"
+                                onchange="handleCitizenUpload(this)">
+                        </div>
+                        <select class="filter-select" id="issueCategory" style="width:100%;margin-top:0.75rem">
+                            <option value="">Select Issue Category...</option>
+                            <option value="pothole">🕳️ Road Pothole</option>
+                            <option value="streetlight">💡 Broken Streetlight</option>
+                            <option value="water">💧 Water Issue</option>
+                            <option value="garbage">🗑️ Garbage Dumping</option>
+                            <option value="crop">🌾 Crop Damage</option>
+                            <option value="other">📋 Other</option>
+                        </select>
+                        <textarea class="sim-textarea" placeholder="Describe the issue briefly (optional)..." rows="2"
+                            style="margin-top:0.5rem" id="issueDesc"></textarea>
+                        <button class="btn-primary" style="width:100%;justify-content:center;margin-top:0.75rem"
+                            onclick="submitCitizenData()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 2L11 13" />
+                                <path d="M22 2L15 22l-4-9-9-4z" />
+                            </svg>
+                            Submit & Validate via AI
+                        </button>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>🗂️ Recent Verified Contributions</h3><span class="live-badge"><span
+                                style="color:#22c55e;animation:pulse 2s infinite">&#9679;</span> LIVE</span>
+                    </div>
+                    <div class="citizen-feed" id="citizenFeed">
+                        <div class="feed-item">
+                            <div class="feed-icon" style="background:rgba(239,68,68,0.15);color:#ef4444">🕳️</div>
+                            <div class="feed-body"><strong>Pothole — NH-48, Andheri East</strong>
+                                <p>AI Validated: Depth ~8cm, Width ~30cm. Auto-assigned to PWD Mumbai.</p><span
+                                    class="feed-time">Verified 3 min ago • Aadhaar: ****4521</span>
+                            </div><span class="status-badge resolved">✓ Validated</span>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon" style="background:rgba(245,158,11,0.15);color:#f59e0b">💡</div>
+                            <div class="feed-body"><strong>Broken Streetlight — Sector 45, Gurugram</strong>
+                                <p>Vision AI confirms: LED panel shattered, pole intact. Urgent nighttime safety risk.
+                                </p><span class="feed-time">Verified 12 min ago • Aadhaar: ****7832</span>
+                            </div><span class="status-badge in-progress">Processing</span>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon" style="background:rgba(34,197,94,0.15);color:#22c55e">🌾</div>
+                            <div class="feed-body"><strong>Crop Damage — Block Etah, UP</strong>
+                                <p>Satellite cross-verified: 12 hectares affected by unseasonal rain. Insurance claim
+                                    auto-initiated.</p><span class="feed-time">Verified 28 min ago • Aadhaar:
+                                    ****1209</span>
+                            </div><span class="status-badge resolved">✓ Validated</span>
+                        </div>
+                        <div class="feed-item">
+                            <div class="feed-icon" style="background:rgba(59,130,246,0.15);color:#3b82f6">💧</div>
+                            <div class="feed-body"><strong>Water Contamination — Ward 7, Patna</strong>
+                                <p>pH level analysis from image: 9.2 (alkaline). Health dept notified.</p><span
+                                    class="feed-time">Verified 45 min ago • Aadhaar: ****6543</span>
+                            </div><span class="status-badge resolved">✓ Validated</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 11: VILLAGE AI AGENT -->
+        <section class="page-view" id="page-village-ai">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Village AI Agent</div>
+                    <h1>Frugal Offline Edge AI Village Agents</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#f59e0b,#d97706);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12.55a11 11 0 0114.08 0" />
+                        <path d="M1.42 9a16 16 0 0121.16 0" />
+                        <path d="M8.53 16.11a6 6 0 016.95 0" />
+                        <circle cx="12" cy="20" r="1" />
+                    </svg>
+                    Works 100% Offline
+                </div>
+            </div>
+            <div class="kpi-grid" style="margin-bottom:1.5rem">
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(245,158,11,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#F59E0B" stroke-width="2">
+                                <rect x="5" y="2" width="14" height="20" rx="2" />
+                                <line x1="12" y1="18" x2="12.01" y2="18" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#F59E0B">12.8K</div>
+                    <div class="kpi-label">Active Devices</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(34,197,94,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#22C55E" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#22C55E">3,847</div>
+                    <div class="kpi-label">Villages Covered</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(59,130,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#3B82F6" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="2" y1="12" x2="22" y2="12" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#3B82F6">22</div>
+                    <div class="kpi-label">Languages Supported</div>
+                </div>
+                <div class="kpi-card">
+                    <div class="kpi-card-top">
+                        <div class="kpi-icon-wrap" style="background:rgba(139,92,246,0.12)"><svg viewBox="0 0 24 24"
+                                fill="none" stroke="#8B5CF6" stroke-width="2">
+                                <path d="M5 12.55a11 11 0 0114.08 0" />
+                                <circle cx="12" cy="20" r="1" />
+                            </svg></div>
+                    </div>
+                    <div class="kpi-value" style="color:#8B5CF6">94.2%</div>
+                    <div class="kpi-label">Offline Accuracy</div>
+                </div>
+            </div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>📱 Village Agent Simulator</h3>
+                    </div>
+                    <div class="village-phone-sim">
+                        <div class="phone-frame">
+                            <div class="phone-status-bar">
+                                <span>🔋 68%</span>
+                                <span class="offline-indicator">📡 OFFLINE</span>
+                                <span>10:45 AM</span>
+                            </div>
+                            <div class="phone-chat" id="villageChat">
+                                <div class="v-msg agent">
+                                    <div class="v-msg-bubble">नमस्ते! मैं आपका गाँव AI सहायक हूँ। मैं बिना इंटरनेट के भी
+                                        काम करता हूँ। आप मुझसे सरकारी योजनाओं, मौसम, या फसल के बारे में पूछ सकते
+                                        हैं।<br><br><em style="font-size:0.65rem;opacity:0.7">Hello! I am your Village
+                                            AI assistant. I work completely offline. Ask me about government schemes,
+                                            weather, or crops.</em></div>
+                                </div>
+                            </div>
+                            <div class="phone-input">
+                                <input type="text" id="villageInput" placeholder="Type in any language..."
+                                    onkeydown="if(event.key==='Enter')sendVillageMsg()">
+                                <button onclick="sendVillageMsg()">→</button>
+                            </div>
+                            <div class="phone-quick-btns">
+                                <button onclick="villageQuick('farming')">🌾 Farming</button>
+                                <button onclick="villageQuick('schemes')">📋 Schemes</button>
+                                <button onclick="villageQuick('weather')">🌤️ Weather</button>
+                                <button onclick="villageQuick('health')">🏥 Health</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>🗺️ Deployment Map & Status</h3>
+                    </div>
+                    <div class="village-stats">
+                        <div class="v-stat-item">
+                            <div class="v-stat-icon" style="background:rgba(34,197,94,0.15);color:#22c55e">🟢</div>
+                            <div><strong>Active Now</strong>
+                                <p>8,432 devices responding</p>
+                            </div>
+                        </div>
+                        <div class="v-stat-item">
+                            <div class="v-stat-icon" style="background:rgba(245,158,11,0.15);color:#f59e0b">🟡</div>
+                            <div><strong>Syncing</strong>
+                                <p>2,104 devices syncing data</p>
+                            </div>
+                        </div>
+                        <div class="v-stat-item">
+                            <div class="v-stat-icon" style="background:rgba(239,68,68,0.15);color:#ef4444">🔴</div>
+                            <div><strong>Offline Queue</strong>
+                                <p>2,264 pending sync</p>
+                            </div>
+                        </div>
+                        <div class="v-stat-item">
+                            <div class="v-stat-icon" style="background:rgba(59,130,246,0.15);color:#3b82f6">📊</div>
+                            <div><strong>Queries Answered (Offline)</strong>
+                                <p>1.2M+ in last 30 days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem">
+                        <div class="dash-card-header">
+                            <h3>📈 Language Distribution</h3>
+                        </div>
+                        <div class="bar-chart">
+                            <div class="bar-item"><span class="bar-label">Hindi</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill"
+                                        style="width:42%;background:linear-gradient(90deg,#FF9933,#ff6b00)">42%</div>
+                                </div>
+                            </div>
+                            <div class="bar-item"><span class="bar-label">Bengali</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill"
+                                        style="width:18%;background:linear-gradient(90deg,#3b82f6,#60a5fa)">18%</div>
+                                </div>
+                            </div>
+                            <div class="bar-item"><span class="bar-label">Tamil</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill"
+                                        style="width:12%;background:linear-gradient(90deg,#22c55e,#4ade80)">12%</div>
+                                </div>
+                            </div>
+                            <div class="bar-item"><span class="bar-label">Telugu</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill"
+                                        style="width:10%;background:linear-gradient(90deg,#a855f7,#c084fc)">10%</div>
+                                </div>
+                            </div>
+                            <div class="bar-item"><span class="bar-label">Others</span>
+                                <div class="bar-track">
+                                    <div class="bar-fill"
+                                        style="width:18%;background:linear-gradient(90deg,#f59e0b,#fbbf24)">18%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 12: SMART GRIEVANCE RESOLVER -->
+        <section class="page-view" id="page-smart-grievance">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Smart Grievance</div>
+                    <h1>Multi-Modal Grievance Resolver</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#06b6d4,#0891b2);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                        <circle cx="8.5" cy="8.5" r="1.5" />
+                        <path d="M21 15l-5-5L5 21" />
+                    </svg>
+                    Vision AI Powered
+                </div>
+            </div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>📷 Upload Issue Photo/Video</h3>
+                    </div>
+                    <div class="smart-upload-area">
+                        <div class="upload-dropzone" onclick="document.getElementById('smartFileUpload').click()"
+                            style="border-color:rgba(6,182,212,0.3)">
+                            <svg width="56" height="56" viewBox="0 0 24 24" fill="none" stroke="#06b6d4"
+                                stroke-width="1.5" style="opacity:0.5">
+                                <rect x="3" y="3" width="18" height="18" rx="2" />
+                                <circle cx="8.5" cy="8.5" r="1.5" />
+                                <path d="M21 15l-5-5L5 21" />
+                            </svg>
+                            <p style="margin-top:0.75rem;font-size:0.85rem;color:var(--text-primary)">Drop a photo or
+                                video of the problem</p>
+                            <p style="font-size:0.7rem;color:var(--text-muted);margin-top:0.25rem">AI will auto-detect:
+                                pothole depth, waterlogging area, structural damage level</p>
+                            <input type="file" id="smartFileUpload" accept="image/*,video/*" style="display:none"
+                                onchange="handleSmartGrievance(this)">
+                        </div>
+                        <div id="smartGrievanceResult" style="margin-top:1rem"></div>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>🤖 AI Resolution Pipeline</h3>
+                    </div>
+                    <div class="resolution-pipeline">
+                        <div class="pipeline-step completed">
+                            <div class="pipe-num">1</div>
+                            <div class="pipe-info"><strong>Photo/Video Upload</strong>
+                                <p>Citizen uploads evidence</p>
+                            </div>
+                            <div class="pipe-status">✅</div>
+                        </div>
+                        <div class="pipeline-connector"></div>
+                        <div class="pipeline-step completed">
+                            <div class="pipe-num">2</div>
+                            <div class="pipe-info"><strong>AI Vision Analysis</strong>
+                                <p>Detect issue type, severity, measurements</p>
+                            </div>
+                            <div class="pipe-status">✅</div>
+                        </div>
+                        <div class="pipeline-connector"></div>
+                        <div class="pipeline-step active">
+                            <div class="pipe-num">3</div>
+                            <div class="pipe-info"><strong>Auto-Create Complaint</strong>
+                                <p>Generate ticket with all metadata</p>
+                            </div>
+                            <div class="pipe-status">⏳</div>
+                        </div>
+                        <div class="pipeline-connector"></div>
+                        <div class="pipeline-step">
+                            <div class="pipe-num">4</div>
+                            <div class="pipe-info"><strong>Assign to Officer</strong>
+                                <p>Route to nearest dept officer</p>
+                            </div>
+                            <div class="pipe-status">—</div>
+                        </div>
+                        <div class="pipeline-connector"></div>
+                        <div class="pipeline-step">
+                            <div class="pipe-num">5</div>
+                            <div class="pipe-info"><strong>Track & Resolve</strong>
+                                <p>Real-time timeline with SLA</p>
+                            </div>
+                            <div class="pipe-status">—</div>
+                        </div>
+                    </div>
+                    <div
+                        style="margin-top:1.5rem;padding:1rem;background:rgba(6,182,212,0.08);border:1px solid rgba(6,182,212,0.2);border-radius:8px">
+                        <p style="font-size:0.78rem;color:var(--text-secondary)"><strong style="color:#06b6d4">70%
+                                Faster Resolution</strong> — AI eliminates manual assessment. Photo → Complaint →
+                            Officer in under 2 minutes.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 13: WAR ROOM -->
+        <section class="page-view" id="page-warroom">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> War Room</div>
+                    <h1>Leader's Private War Room</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#ef4444,#b91c1c);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                    </svg>
+                    TOP SECRET • ENCRYPTED
+                </div>
+            </div>
+            <div id="warRoomLocked" class="warroom-lock-screen">
+                <div class="lock-icon-large">
+                    <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="1.5">
+                        <rect x="3" y="11" width="18" height="11" rx="2" />
+                        <path d="M7 11V7a5 5 0 0110 0v4" />
+                        <circle cx="12" cy="16" r="1" />
+                    </svg>
+                </div>
+                <h2 style="color:var(--text-primary);margin-top:1rem">Classified Access Required</h2>
+                <p style="color:var(--text-secondary);font-size:0.82rem;margin-top:0.5rem">This module requires IAS/IPS
+                    officer credentials with Level 5+ clearance.</p>
+                <div class="warroom-auth">
+                    <input type="password" id="warRoomPin" placeholder="Enter 6-digit Security PIN" maxlength="6"
+                        class="warroom-pin-input">
+                    <button class="btn-primary" onclick="unlockWarRoom()" style="justify-content:center">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="11" width="18" height="11" rx="2" />
+                            <path d="M7 11V7a5 5 0 0110 0v4" />
+                        </svg>
+                        Authenticate & Enter
+                    </button>
+                    <p style="font-size:0.65rem;color:var(--text-muted);margin-top:0.5rem">Demo PIN: 247365</p>
+                </div>
+            </div>
+            <div id="warRoomContent" class="warroom-content" style="display:none">
+                <div class="warroom-header-bar">
+                    <div class="wr-security-info">
+                        <span class="wr-badge">🔒 AES-256 Encrypted Session</span>
+                        <span class="wr-badge">🕵️ Auto-Redaction ON</span>
+                        <span class="wr-badge">📍 No Location Logging</span>
+                        <span class="wr-badge">⏱️ Session: <span id="wrSessionTime">00:00</span></span>
+                    </div>
+                    <button class="btn-secondary" onclick="lockWarRoom()"
+                        style="color:#ef4444;border-color:rgba(239,68,68,0.3)">🔒 Lock & Exit</button>
+                </div>
+                <div class="dash-grid">
+                    <div class="dash-card" style="border-color:rgba(239,68,68,0.15)">
+                        <div class="dash-card-header">
+                            <h3>🔍 Classified Query Console</h3>
+                        </div>
+                        <div class="wr-chat" id="wrChat">
+                            <div class="wr-msg system">🔒 Encrypted session started. All queries are auto-redacted and
+                                graph paths hidden from non-authorized users. No data leaves this session.</div>
+                        </div>
+                        <div class="wr-input-area">
+                            <textarea id="wrInput" placeholder="Ask classified intelligence query..." rows="2"
+                                class="sim-textarea"></textarea>
+                            <button class="btn-primary" onclick="sendWarRoomQuery()"
+                                style="margin-top:0.5rem;width:100%;justify-content:center">🔐 Send Encrypted
+                                Query</button>
+                        </div>
+                    </div>
+                    <div class="dash-card" style="border-color:rgba(239,68,68,0.15)">
+                        <div class="dash-card-header">
+                            <h3>📊 Sensitive Metrics Dashboard</h3>
+                        </div>
+                        <div class="wr-metrics">
+                            <div class="wr-metric"><span class="wr-metric-label">Law & Order Index</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:78%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div>
+                                </div><span class="wr-metric-val">78/100</span>
+                            </div>
+                            <div class="wr-metric"><span class="wr-metric-label">Border Threat Level</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:34%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+                                </div><span class="wr-metric-val">LOW</span>
+                            </div>
+                            <div class="wr-metric"><span class="wr-metric-label">Communal Harmony</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:85%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+                                </div><span class="wr-metric-val">85/100</span>
+                            </div>
+                            <div class="wr-metric"><span class="wr-metric-label">Naxal Activity</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:22%;background:linear-gradient(90deg,#22c55e,#4ade80)"></div>
+                                </div><span class="wr-metric-val">LOW</span>
+                            </div>
+                            <div class="wr-metric"><span class="wr-metric-label">Cyber Threat Index</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:45%;background:linear-gradient(90deg,#f59e0b,#fbbf24)"></div>
+                                </div><span class="wr-metric-val">MEDIUM</span>
+                            </div>
+                            <div class="wr-metric"><span class="wr-metric-label">Economic Stability</span>
+                                <div class="wr-metric-bar">
+                                    <div style="width:72%;background:linear-gradient(90deg,#3b82f6,#60a5fa)"></div>
+                                </div><span class="wr-metric-val">72/100</span>
+                            </div>
+                        </div>
+                        <div
+                            style="margin-top:1rem;padding:0.75rem;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);border-radius:8px;font-size:0.72rem;color:var(--red-alert)">
+                            ⚠️ All metrics are classified. Screen auto-locks after 5 minutes of inactivity.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 14: SCHEME OUTREACH ENGINE -->
+        <section class="page-view" id="page-scheme-outreach">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> Scheme Outreach</div>
+                    <h1>Auto Multilingual Scheme Outreach Engine</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#10b981,#059669);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13" />
+                        <path d="M22 2L15 22l-4-9-9-4z" />
+                    </svg>
+                    22 Languages • Instant Campaign
+                </div>
+            </div>
+            <div class="dash-grid">
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>📄 Upload Scheme PDF</h3>
+                    </div>
+                    <div class="scheme-upload">
+                        <div class="upload-dropzone" onclick="document.getElementById('schemePdfUpload').click()"
+                            style="border-color:rgba(16,185,129,0.3)">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#10b981"
+                                stroke-width="1.5" style="opacity:0.5">
+                                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+                                <polyline points="14 2 14 8 20 8" />
+                            </svg>
+                            <p style="margin-top:0.5rem;font-size:0.85rem;color:var(--text-primary)">Upload Scheme PDF
+                                Document</p>
+                            <p style="font-size:0.7rem;color:var(--text-muted)">AI will extract, translate to 22
+                                languages, create voice avatars</p>
+                            <input type="file" id="schemePdfUpload" accept=".pdf" style="display:none"
+                                onchange="handleSchemeUpload(this)">
+                        </div>
+                        <div style="margin-top:1rem">
+                            <label
+                                style="font-size:0.78rem;color:var(--text-secondary);display:block;margin-bottom:0.5rem">Or
+                                select a demo scheme:</label>
+                            <div class="scheme-presets">
+                                <button class="sim-preset-btn" onclick="demoSchemeOutreach('PM Kisan Samman Nidhi')">🌾
+                                    PM-KISAN</button>
+                                <button class="sim-preset-btn" onclick="demoSchemeOutreach('Ayushman Bharat')">🏥
+                                    Ayushman Bharat</button>
+                                <button class="sim-preset-btn"
+                                    onclick="demoSchemeOutreach('Digital India Programme')">💻 Digital India</button>
+                                <button class="sim-preset-btn" onclick="demoSchemeOutreach('Ujjwala Yojana')">🔥 Ujjwala
+                                    Yojana</button>
+                            </div>
+                        </div>
+                        <button class="btn-primary"
+                            style="width:100%;justify-content:center;margin-top:1rem;background:linear-gradient(135deg,#10b981,#059669)"
+                            onclick="generateOutreach()">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M22 2L11 13" />
+                                <path d="M22 2L15 22l-4-9-9-4z" />
+                            </svg>
+                            Generate Multilingual Campaign
+                        </button>
+                    </div>
+                </div>
+                <div class="dash-card">
+                    <div class="dash-card-header">
+                        <h3>🌐 Generated Campaign</h3>
+                    </div>
+                    <div id="outreachResult">
+                        <div class="sim-empty-state" style="padding:2rem">
+                            <div class="sim-empty-icon">📢</div>
+                            <h3>Upload a scheme to generate</h3>
+                            <p>AI will create voice avatars in 22 languages + geo-targeted messages ready for
+                                WhatsApp/SMS distribution.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PAGE 15: MY SCHEMES -->
+        <section class="page-view" id="page-my-schemes">
+            <div class="page-header">
+                <div>
+                    <div class="page-breadcrumb">Home <span>/</span> My Schemes</div>
+                    <h1>Personalised Scheme Eligibility Twin</h1>
+                </div>
+                <div class="warroom-badge"
+                    style="background:linear-gradient(135deg,#FF9933,#e67300);padding:0.5rem 1rem;border-radius:8px;font-size:0.72rem;color:#fff;display:flex;align-items:center;gap:0.5rem">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                        <circle cx="12" cy="7" r="4" />
+                    </svg>
+                    Aadhaar + DigiLocker
+                </div>
+            </div>
+            <div id="schemesLocked" class="schemes-auth-section">
+                <div class="schemes-auth-card">
+                    <div class="scheme-auth-icon">
+                        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#FF9933" stroke-width="1.5">
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" />
+                            <circle cx="12" cy="7" r="4" />
+                            <path d="M16 11l2 2 4-4" />
+                        </svg>
+                    </div>
+                    <h2 style="color:var(--text-primary);margin-top:1rem">Link Your Identity</h2>
+                    <p style="color:var(--text-secondary);font-size:0.82rem;margin:0.5rem 0 1.5rem">Connect Aadhaar +
+                        DigiLocker to discover all schemes you're eligible for.</p>
+                    <div class="scheme-auth-form">
+                        <input type="text" id="aadhaarInput" placeholder="Enter Aadhaar Number (Demo: any 12 digits)"
+                            maxlength="12" class="warroom-pin-input" style="letter-spacing:2px">
+                        <button class="btn-primary" onclick="linkAadhaarSchemes()"
+                            style="width:100%;justify-content:center;margin-top:0.75rem">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg>
+                            Verify & Discover Schemes
+                        </button>
+                        <p style="font-size:0.65rem;color:var(--text-muted);margin-top:0.5rem;text-align:center">Demo:
+                            Enter any 12-digit number</p>
+                    </div>
+                </div>
+            </div>
+            <div id="schemesContent" style="display:none">
+                <div class="schemes-summary-bar">
+                    <div class="scheme-summary-item"><span class="ss-label">Eligible Schemes</span><span
+                            class="ss-value" style="color:#22c55e">7</span></div>
+                    <div class="scheme-summary-item"><span class="ss-label">Total Benefit Value</span><span
+                            class="ss-value" style="color:#FF9933">₹1,84,000</span></div>
+                    <div class="scheme-summary-item"><span class="ss-label">Already Claimed</span><span class="ss-value"
+                            style="color:#3b82f6">3</span></div>
+                    <div class="scheme-summary-item"><span class="ss-label">Action Needed</span><span class="ss-value"
+                            style="color:#f59e0b">4</span></div>
+                </div>
+                <div class="schemes-list" id="schemesList"></div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <div class="tricolor-line"><span style="background:#FF9933"></span><span
+                    style="background:#fff"></span><span style="background:#138808"></span></div>
+            <p>&copy; 2026 ViksitNetra | Viksit Bharat Intelligence Eye | v1.0</p>
+            <p>Aligned with India AI Mission &bull; Powered by Bhashini &bull; Built on Indian Infrastructure</p>
+        </footer>
+
+    </main>
+
+    <script src="app.js"></script>
+    <script src="frontend/js/api.js"></script>
+    <script src="frontend/js/dashboard.js"></script>
+    <script>
+        // E-Voting demo
+        function castDemoVote() {
+            const sel = document.querySelector('input[name="vote"]:checked');
+            if (!sel) { showToast('Please select a candidate first', 'warning'); return; }
+            const res = document.getElementById('voteResult');
+            const hash = '0x' + Array.from({ length: 8 }, () => Math.floor(Math.random() * 16).toString(16)).join('') + '...' + Array.from({ length: 4 }, () => Math.floor(Math.random() * 16).toString(16)).join('');
+            res.innerHTML = `<div style="padding:1rem;background:rgba(34,197,94,0.1);border:1px solid rgba(34,197,94,0.3);border-radius:8px;font-size:0.78rem"><strong style="color:#22C55E">✅ Vote Recorded Successfully!</strong><br><br>Candidate: <strong>${sel.value}</strong><br>Block Hash: <code style="font-size:0.68rem;color:var(--saffron)">${hash}</code><br>Timestamp: ${new Date().toLocaleString('en-IN')}<br><br><em style="color:var(--text-muted);font-size:0.68rem">Your vote has been sealed in the Hyperledger Fabric blockchain with zero-knowledge proof verification.</em></div>`;
+            const log = document.getElementById('blockchainLog');
+            if (log) { const d = document.createElement('div'); d.style.cssText = 'padding:0.5rem;border-bottom:1px solid var(--border-color);color:#22C55E;animation:fadeUp 0.5s ease'; d.innerHTML = `🔗 Block #${124801 + Math.floor(Math.random() * 10)} — <strong>NEW VOTE</strong> | Hash: ${hash} | Just now`; log.insertBefore(d, log.firstChild); }
+            showToast('Vote sealed in blockchain! Audit trail updated.', 'success');
+        }
+    </script>
+</body>
+
+</html>

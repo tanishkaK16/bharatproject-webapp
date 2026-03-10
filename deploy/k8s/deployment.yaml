@@ -1,0 +1,64 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viksitnetra-backend
+  namespace: viksitnetra-prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: viksitnetra-backend
+  template:
+    metadata:
+      labels:
+        app: viksitnetra-backend
+    spec:
+      containers:
+      - name: viksitnetra-api
+        image: viksitnetra/backend:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+        envFrom:
+        - configMapRef:
+            name: viksitnetra-config
+        env:
+        - name: NEO4J_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: viksitnetra-secrets
+              key: neo4j-password
+        resources:
+          requests:
+            cpu: "4"
+            memory: "16Gi"
+            nvidia.com/gpu: "1"  # Requesting NVIDIA GPUs on Yotta Shakti
+          limits:
+            cpu: "8"
+            memory: "32Gi"
+            nvidia.com/gpu: "2"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: viksitnetra-frontend
+  namespace: viksitnetra-prod
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: viksitnetra-frontend
+  template:
+    metadata:
+      labels:
+        app: viksitnetra-frontend
+    spec:
+      containers:
+      - name: viksitnetra-ui
+        image: viksitnetra/frontend:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: "1"
+            memory: "1Gi"
