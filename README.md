@@ -44,7 +44,7 @@ ENVIRONMENT=render
 
 The **public URL** (for example, `https://viksitnetra-backend.onrender.com`) will be shown on the Render dashboard; open `/api/docs` on that URL for Swagger UI.
 
-> Note: From this environment I cannot authenticate to your Render account, so you must click through the steps above to obtain the exact live URL.
+
 
 ---
 
