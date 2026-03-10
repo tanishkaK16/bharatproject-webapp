@@ -96,18 +96,25 @@ app.include_router(api_router, prefix=settings.API_PREFIX)
 from app.api.graph_routes import router as graph_router
 app.include_router(graph_router, prefix=settings.API_PREFIX)
 
-# Resolve project root — works in both Docker (/app/) and local dev (../../)
-_app_dir = os.path.dirname(os.path.dirname(__file__))  # backend/
-_candidate_root = os.path.dirname(_app_dir)             # project root (local dev)
+# Resolve project root — must find index.html
+# Strategy: try multiple candidate directories in order
+_candidates = [
+    os.getcwd(),                                                          # Docker WORKDIR = /app/
+    os.path.dirname(os.path.dirname(os.path.abspath(__file__))),           # two parents up from main.py
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))),  # three parents up (local dev)
+    "/app",                                                               # hardcoded Docker fallback
+]
 
-# Docker layout: index.html lives alongside the app/ package in /app/
-if os.path.exists(os.path.join(_app_dir, "index.html")):
-    root_dir = _app_dir
-# Local dev layout: index.html is two levels up from backend/app/
-elif os.path.exists(os.path.join(_candidate_root, "index.html")):
-    root_dir = _candidate_root
-else:
-    root_dir = os.getcwd()
+root_dir = os.getcwd()  # default
+for candidate in _candidates:
+    if candidate and os.path.exists(os.path.join(candidate, "index.html")):
+        root_dir = candidate
+        break
+
+logger.info(f"[Config] root_dir resolved to: {root_dir}")
+logger.info(f"[Config] index.html exists: {os.path.exists(os.path.join(root_dir, 'index.html'))}")
+logger.info(f"[Config] __file__ = {__file__}")
+logger.info(f"[Config] cwd = {os.getcwd()}")
 
 frontend_dir = os.path.join(root_dir, "frontend")
 
