@@ -1,0 +1,11 @@
+__pycache__
+*.pyc
+.git
+.github
+.env
+deploy/
+*.md
+.gitignore
+backend/logs/*.log
+node_modules
+.vscode

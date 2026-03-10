@@ -19,7 +19,11 @@ from app.etl.pipeline import etl_pipeline
 # Configure logging
 logger.remove()
 logger.add(sys.stdout, level="INFO", format="<green>{time:HH:mm:ss}</green> | <level>{level: <8}</level> | <cyan>{name}</cyan> - {message}")
-logger.add("logs/viksitnetra.log", rotation="10 MB", retention="7 days", level="DEBUG")
+try:
+    os.makedirs("logs", exist_ok=True)
+    logger.add("logs/viksitnetra.log", rotation="10 MB", retention="7 days", level="DEBUG")
+except Exception:
+    pass  # Read-only filesystem fallback
 
 
 @asynccontextmanager
@@ -92,14 +96,29 @@ app.include_router(api_router, prefix=settings.API_PREFIX)
 from app.api.graph_routes import router as graph_router
 app.include_router(graph_router, prefix=settings.API_PREFIX)
 
-# Resolve project root (two levels up from app/)
-root_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+# Resolve project root — works in both Docker (/app/) and local dev (../../)
+_app_dir = os.path.dirname(os.path.dirname(__file__))  # backend/
+_candidate_root = os.path.dirname(_app_dir)             # project root (local dev)
+
+# Docker layout: index.html lives alongside the app/ package in /app/
+if os.path.exists(os.path.join(_app_dir, "index.html")):
+    root_dir = _app_dir
+# Local dev layout: index.html is two levels up from backend/app/
+elif os.path.exists(os.path.join(_candidate_root, "index.html")):
+    root_dir = _candidate_root
+else:
+    root_dir = os.getcwd()
+
 frontend_dir = os.path.join(root_dir, "frontend")
 
 # Serve frontend subdirectory files
 if os.path.exists(frontend_dir):
-    app.mount("/frontend/js", StaticFiles(directory=os.path.join(frontend_dir, "js")), name="frontend_js")
-    app.mount("/frontend/css", StaticFiles(directory=os.path.join(frontend_dir, "css")), name="frontend_css")
+    js_dir = os.path.join(frontend_dir, "js")
+    if os.path.exists(js_dir):
+        app.mount("/frontend/js", StaticFiles(directory=js_dir), name="frontend_js")
+    css_dir = os.path.join(frontend_dir, "css")
+    if os.path.exists(css_dir):
+        app.mount("/frontend/css", StaticFiles(directory=css_dir), name="frontend_css")
     if os.path.exists(os.path.join(frontend_dir, "assets")):
         app.mount("/frontend/assets", StaticFiles(directory=os.path.join(frontend_dir, "assets")), name="frontend_assets")
     if os.path.exists(os.path.join(frontend_dir, "pages")):
@@ -142,7 +161,44 @@ async def serve_kg_hero():
 
 @app.get("/viksitnetra_hero_bg.png")
 async def serve_hero_bg():
-    return FileResponse(os.path.join(root_dir, "viksitnetra_hero_bg.png"), media_type="image/png")
+    path = os.path.join(root_dir, "viksitnetra_hero_bg.png")
+    if not os.path.exists(path):
+        path = os.path.join(root_dir, "bharatjnana_hero_bg.png")
+    if os.path.exists(path):
+        return FileResponse(path, media_type="image/png")
+    return {"error": "Image not found"}
+
+
+@app.get("/bharatjnana_hero_bg.png")
+async def serve_bharatjnana_hero_bg():
+    path = os.path.join(root_dir, "bharatjnana_hero_bg.png")
+    if os.path.exists(path):
+        return FileResponse(path, media_type="image/png")
+    return {"error": "Image not found"}
+
+
+@app.get("/emergency.html")
+async def serve_emergency_html():
+    path = os.path.join(root_dir, "emergency.html")
+    if os.path.exists(path):
+        return FileResponse(path)
+    return {"error": "Page not found"}
+
+
+@app.get("/emergency.css")
+async def serve_emergency_css():
+    path = os.path.join(root_dir, "emergency.css")
+    if os.path.exists(path):
+        return FileResponse(path, media_type="text/css")
+    return {"error": "File not found"}
+
+
+@app.get("/emergency.js")
+async def serve_emergency_js():
+    path = os.path.join(root_dir, "emergency.js")
+    if os.path.exists(path):
+        return FileResponse(path, media_type="application/javascript")
+    return {"error": "File not found"}
 
 
 @app.get("/")

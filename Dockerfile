@@ -1,63 +1,44 @@
-## ViksitNetra - GPU-ready Backend Dockerfile (multi-stage)
-# Stage 1: CUDA-enabled base with Python and build deps
-FROM nvidia/cuda:12.1.0-runtime-ubuntu22.04 AS base
-
-ENV DEBIAN_FRONTEND=noninteractive \
-    PYTHONUNBUFFERED=1 \
-    PIP_NO_CACHE_DIR=off \
-    PIP_DISABLE_PIP_VERSION_CHECK=on \
-    PIP_DEFAULT_TIMEOUT=100 \
-    POETRY_VIRTUALENVS_CREATE=false
-
-RUN apt-get update && apt-get install -y --no-install-recommends \
-    python3.11 python3.11-venv python3-pip python3-dev \
-    build-essential curl ca-certificates git \
- && rm -rf /var/lib/apt/lists/*
-
-RUN update-alternatives --install /usr/bin/python python /usr/bin/python3.11 1 \
- && update-alternatives --install /usr/bin/pip pip /usr/bin/pip3 1
+# ViksitNetra — Unified Render Deployment
+# Single container: FastAPI serves both API + Frontend
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Stage 2: Builder - install Python dependencies
-FROM base AS builder
+# Install OS deps
+RUN apt-get update && apt-get install -y --no-install-recommends gcc python3-dev \
+    && rm -rf /var/lib/apt/lists/*
 
-WORKDIR /app
-COPY backend/requirements.txt /app/requirements.txt
+# Install Python deps
+COPY backend/requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN python -m venv /opt/venv \
- && . /opt/venv/bin/activate \
- && pip install --upgrade pip \
- && pip install --no-cache-dir -r /app/requirements.txt
-
-# Stage 3: Final runtime image (GPU-capable, minimal)
-FROM base AS runtime
-
-LABEL maintainer="admin@viksitnetra.gov.in" \
-      description="ViksitNetra GraphRAG Intelligence Engine - Sovereign GPU Backend"
-
-ENV VIRTUAL_ENV=/opt/venv \
-    PATH="/opt/venv/bin:$PATH" \
-    UVICORN_WORKERS=4 \
-    UVICORN_PORT=8000 \
-    HOST=0.0.0.0
-
-WORKDIR /app
-
-# Copy virtualenv from builder
-COPY --from=builder /opt/venv /opt/venv
-
-# Copy backend source
+# Copy backend application
 COPY backend/app/ /app/app/
-COPY backend/logs/ /app/logs/
 
-# Create non-root user for security
-RUN useradd -m -u 1001 vnetra \
- && chown -R vnetra:vnetra /app
-USER vnetra
+# Copy frontend static files (served by FastAPI directly)
+COPY index.html /app/index.html
+COPY style.css /app/style.css
+COPY app.js /app/app.js
+COPY frontend/ /app/frontend/
 
+# Copy all PNG images
+COPY india_map_bg.png /app/india_map_bg.png
+COPY india_map_neon.png /app/india_map_neon.png
+COPY knowledge_graph_hero.png /app/knowledge_graph_hero.png
+COPY bharatjnana_hero_bg.png /app/bharatjnana_hero_bg.png
+
+# Copy optional files (styles.css fallback, emergency, login)
+COPY styles.css /app/styles.css
+COPY emergency.html /app/emergency.html
+COPY emergency.css /app/emergency.css
+COPY emergency.js /app/emergency.js
+COPY login.html /app/login.html
+
+# Create logs directory
+RUN mkdir -p /app/logs
+
+# Expose port (Render uses PORT env var)
 EXPOSE 8000
 
-# Default GPU runtime flags are handled by nvidia-container-runtime on the cluster.
-CMD ["bash", "-lc", "uvicorn app.main:app --host ${HOST} --port ${UVICORN_PORT} --workers ${UVICORN_WORKERS}"]
-
+# Start FastAPI
+CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000} --workers 2"]
