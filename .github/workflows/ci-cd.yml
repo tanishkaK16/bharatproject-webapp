@@ -1,0 +1,88 @@
+name: CI/CD - Build, Push & Deploy ViksitNetra
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-push-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to Yotta Shakti Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: index.docker.shakti.yotta.in
+          username: ${{ secrets.YOTTA_USERNAME }}
+          password: ${{ secrets.YOTTA_PASSWORD }}
+
+      - name: Build & Push Backend (GPU-ready)
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: |
+            index.docker.shakti.yotta.in/gov/viksitnetra-backend:latest
+            index.docker.shakti.yotta.in/gov/viksitnetra-backend:${{ github.sha }}
+
+  build-and-push-frontend:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Log in to Yotta Shakti Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: index.docker.shakti.yotta.in
+          username: ${{ secrets.YOTTA_USERNAME }}
+          password: ${{ secrets.YOTTA_PASSWORD }}
+
+      - name: Build & Push Frontend
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: deploy/docker/Dockerfile.frontend
+          push: true
+          tags: |
+            index.docker.shakti.yotta.in/gov/viksitnetra-frontend:latest
+            index.docker.shakti.yotta.in/gov/viksitnetra-frontend:${{ github.sha }}
+
+  deploy-to-yotta-shakti:
+    needs:
+      - build-and-push-backend
+      - build-and-push-frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set Kubernetes Context for Yotta Shakti
+        uses: azure/k8s-set-context@v3
+        with:
+          method: kubeconfig
+          kubeconfig: ${{ secrets.YOTTA_KUBECONFIG }}
+
+      - name: Create Namespace if not exists
+        run: |
+          kubectl get namespace viksitnetra-prod || kubectl create namespace viksitnetra-prod
+
+      - name: Apply Kubernetes Manifests
+        run: |
+          kubectl apply -f deploy/k8s/configmap.yaml
+          kubectl apply -f deploy/k8s/redis.yaml
+          kubectl apply -f deploy/k8s/neo4j.yaml
+          kubectl apply -f deploy/k8s/deployment.yaml
+          kubectl apply -f deploy/k8s/service.yaml
+          kubectl apply -f deploy/k8s/ingress.yaml
+          kubectl apply -f deploy/k8s/hpa.yaml
+
+      - name: Verify Rollout
+        run: |
+          kubectl rollout status deployment/viksitnetra-backend -n viksitnetra-prod
+          kubectl rollout status deployment/viksitnetra-frontend -n viksitnetra-prod
+

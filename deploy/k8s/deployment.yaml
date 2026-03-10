@@ -3,6 +3,10 @@ kind: Deployment
 metadata:
   name: viksitnetra-backend
   namespace: viksitnetra-prod
+  labels:
+    app.kubernetes.io/name: viksitnetra-backend
+    app.kubernetes.io/part-of: viksitnetra
+    app.kubernetes.io/tier: backend
 spec:
   replicas: 3
   selector:
@@ -12,10 +16,12 @@ spec:
     metadata:
       labels:
         app: viksitnetra-backend
+        app.kubernetes.io/name: viksitnetra-backend
+        app.kubernetes.io/part-of: viksitnetra
     spec:
       containers:
       - name: viksitnetra-api
-        image: viksitnetra/backend:latest
+        image: index.docker.shakti.yotta.in/gov/viksitnetra-backend:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -32,7 +38,7 @@ spec:
           requests:
             cpu: "4"
             memory: "16Gi"
-            nvidia.com/gpu: "1"  # Requesting NVIDIA GPUs on Yotta Shakti
+            nvidia.com/gpu: "1"  # NVIDIA H100/L40S on Shakti sovereign GPU pool
           limits:
             cpu: "8"
             memory: "32Gi"
@@ -43,6 +49,10 @@ kind: Deployment
 metadata:
   name: viksitnetra-frontend
   namespace: viksitnetra-prod
+  labels:
+    app.kubernetes.io/name: viksitnetra-frontend
+    app.kubernetes.io/part-of: viksitnetra
+    app.kubernetes.io/tier: frontend
 spec:
   replicas: 3
   selector:
@@ -52,10 +62,12 @@ spec:
     metadata:
       labels:
         app: viksitnetra-frontend
+        app.kubernetes.io/name: viksitnetra-frontend
+        app.kubernetes.io/part-of: viksitnetra
     spec:
       containers:
       - name: viksitnetra-ui
-        image: viksitnetra/frontend:latest
+        image: index.docker.shakti.yotta.in/gov/viksitnetra-frontend:latest
         ports:
         - containerPort: 80
         resources:

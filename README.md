@@ -1,77 +1,119 @@
 # 👁️ ViksitNetra - Sovereign Intelligence Platform
 
-ViksitNetra is a production-grade, multi-node, GPU-accelerated Sovereign AI Platform built to unify massive volumes of fragmented government data across state sectors into an intelligent, interactive command center. 
+ViksitNetra is a production-grade, multi-node, GPU-accelerated Sovereign AI Platform built to unify massive volumes of fragmented government data across state sectors into an intelligent, interactive command center.
 
-This repository contains the full Dockerized microservice architecture ready for hyperscale deployment.
-
-## 🚀 Live Demo URLs (Preview Deployments)
-*Since the actual Yotta Shakti cluster serves verified government intra-nets, this preview has been mapped to free-tier cloud environments for immediate validation.*
-- **Render.com Cloud App:** `https://viksitnetra-agentic-demo.onrender.com`
-- **Render.com API:** `https://viksitnetra-agentic-backend.onrender.com/api/docs`
-*(Note: Initial boot might take ~50 seconds as Render free instances spin up from standby).*
+This repository contains a **FastAPI + Neo4j + Redis + GraphRAG** stack, fully containerized and ready for **Yotta Shakti sovereign cloud** and instant **Render.com** demos.
 
 ---
 
-## 🇮🇳 Yotta Shakti Cluster 5-Minute Deployment Guide
+## 🚀 One‑Click Render Deployment (Instant Public Demo)
 
-Follow these steps to deploy ViksitNetra directly into a verified Indian Sovereign Node (e.g., Yotta Data Services D1 Campus).
+- **Recommended Render service type**: `Web Service` (Docker)
+- **Runtime**: `Free` tier, `Auto deploy` from GitHub
+
+### **Step 1 – Push this repo to GitHub**
+
+```bash
+git init
+git add .
+git commit -m "feat: viksitnetra sovereign graphrag platform"
+git branch -M main
+git remote add origin https://github.com/<your-github-user>/viksitnetra.git
+git push -u origin main
+```
+
+### **Step 2 – Create Render Backend Service (Docker)**
+
+1. Log in to Render and select **New → Web Service**.
+2. Connect your GitHub repository `viksitnetra`.
+3. In **Environment**, choose:
+   - **Build Command**: *(leave empty – Docker auto-builds)*
+   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port 8000 --workers 2`
+4. In **Instance Type**, keep `Free`.
+5. Set environment variables:
+
+```text
+NEO4J_URI=neo4j://neo4j:7687
+NEO4J_USER=neo4j
+NEO4J_PASSWORD=sovereign_secret
+REDIS_URL=redis://redis:6379/0
+ENVIRONMENT=render
+```
+
+6. Click **Create Web Service** and wait until status is `Live`.
+
+The **public URL** (for example, `https://viksitnetra-backend.onrender.com`) will be shown on the Render dashboard; open `/api/docs` on that URL for Swagger UI.
+
+> Note: From this environment I cannot authenticate to your Render account, so you must click through the steps above to obtain the exact live URL.
+
+---
+
+## 🇮🇳 Yotta Shakti Deployment Guide (Shakti Cluster, `viksitnetra-prod`)
 
 ### **Prerequisites**
-- Yotta `kubectl` cluster access with namespace `viksitnetra-prod`
-- NVIDIA GPU pool allocated (Nvidia H100s for inference)
-- Yotta Cloud Secrets configured: `viksitnetra-secrets` (holds Neo4j & Proxy passwords)
 
-### **Step 1: Apply Configurations & Databases**
-Deploy the base configuration, in-memory cache, and the Graph DB node.
+- **Kubernetes access** to your Yotta Shakti cluster (`kubectl` configured).
+- **Namespace** `viksitnetra-prod` available (workflow will create it if missing).
+- **NVIDIA GPU pool** (H100 / L40S) with the **NVIDIA device plugin** enabled.
+- **Secrets**:
+  - `viksitnetra-secrets` in `viksitnetra-prod` with:
+    - `neo4j-password`
+    - `neo4j-auth-string`
+
+### **Step 1 – Apply Config & Data Services**
+
 ```bash
+kubectl create namespace viksitnetra-prod || true
+
 kubectl apply -f deploy/k8s/configmap.yaml
 kubectl apply -f deploy/k8s/redis.yaml
 kubectl apply -f deploy/k8s/neo4j.yaml
 ```
 
-### **Step 2: Start The GPU-Accelerated FastAPI Backend**
-This step mounts sovereign LLMs via the NVIDIA container runtime explicitly mapped in the Deployments.
+### **Step 2 – Deploy GPU‑Accelerated Backend & Frontend**
+
 ```bash
 kubectl apply -f deploy/k8s/deployment.yaml
 kubectl apply -f deploy/k8s/service.yaml
 ```
 
-### **Step 3: Map The Ingress routing & Auto-Scale**
-Expose the platform via Nginx Reverse-Proxy to the `gov.in` domain and initiate scaling.
+The backend deployment requests `nvidia.com/gpu` resources suitable for **H100/L40S** pools on Shakti.
+
+### **Step 3 – Expose via Ingress & Enable Auto‑Scaling**
+
 ```bash
 kubectl apply -f deploy/k8s/ingress.yaml
 kubectl apply -f deploy/k8s/hpa.yaml
 ```
 
-### **Step 4: Verify Sovereign Rollout**
-Confirm the HPA targets and GPU allocations are actively scheduling.
+### **Step 4 – Verify Sovereign Rollout**
+
 ```bash
 kubectl get pods -n viksitnetra-prod -w
 kubectl get hpa -n viksitnetra-prod
 ```
-Once the Pods emit `Running`, ViksitNetra is live.
+
+Once Pods are `Running` and the Ingress is provisioned, ViksitNetra is live on your Yotta Shakti sovereign cluster.
 
 ---
 
-## 🐙 Pushing to GitHub & Activating CI/CD
+## 🐙 GitHub CI/CD to Yotta Shakti
 
-The repository is built following GitHub Actions CI/CD. The `/deploy/docker` mapping pushes straight into `index.docker.shakti.yotta.in`.
+The repository includes `.github/workflows/ci-cd.yml` which:
 
-1. **Initialize & Commit your Local Build:**
+- Builds and pushes **GPU-ready backend** and **frontend** images to `index.docker.shakti.yotta.in`.
+- Applies all manifests in `deploy/k8s/` to the `viksitnetra-prod` namespace.
+
+### **Secrets required in GitHub**
+
+- **`YOTTA_USERNAME` / `YOTTA_PASSWORD`**: credentials for the Yotta Shakti container registry.
+- **`YOTTA_KUBECONFIG`**: base64‑encoded kubeconfig with access to the Shakti cluster.
+
+Once configured, a simple:
+
 ```bash
-git init
-git add .
-git commit -m "feat: Production-ready GraphRAG Sovereign AI Deployment"
+git push origin main
 ```
 
-2. **Connect to your Government VC Repository:**
-```bash
-git remote add origin https://github.com/my-gov-organization/viksitnetra.git
-git branch -M main
-```
+will trigger the CI/CD workflow and perform a full rollout to the Shakti cluster.
 
-3. **Deploy via Action Triggers:**
-```bash
-git push -u origin main
-```
-*The `.github/workflows/deploy.yml` pipeline will immediately spin up, compile the Python3.11/Node containers, auto-inject Neo4j credentials, and execute a secure Kube rollout against the Shakti endpoints.*

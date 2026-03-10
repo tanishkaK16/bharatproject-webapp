@@ -9,7 +9,7 @@ spec:
     kind: Deployment
     name: viksitnetra-backend
   minReplicas: 3
-  maxReplicas: 58000  # Scaling aggressively for national demand on Yotta Shakti Cluser
+  maxReplicas: 32
   metrics:
   - type: Resource
     resource:
