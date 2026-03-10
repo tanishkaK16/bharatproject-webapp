@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  backend:
+  viksitnetra-backend:
     build: 
       context: ../../
       dockerfile: deploy/docker/Dockerfile.backend
@@ -18,7 +18,7 @@ services:
     volumes:
       - ../../backend/logs:/app/logs
 
-  frontend:
+  viksitnetra-frontend:
     build:
       context: ../../
       dockerfile: deploy/docker/Dockerfile.frontend
